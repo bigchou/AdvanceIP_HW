@@ -62,3 +62,6 @@ C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Imag
 C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form1.resources
 C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Properties.Resources.resources
 C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csproj.GenerateResource.Cache
+D:\test\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe.config
+D:\test\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.exe
+D:\test\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.pdb

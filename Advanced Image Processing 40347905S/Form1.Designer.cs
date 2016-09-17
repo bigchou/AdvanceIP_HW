@@ -73,7 +73,7 @@
             // 
             // reset
             // 
-            this.reset.Location = new System.Drawing.Point(458, 319);
+            this.reset.Location = new System.Drawing.Point(458, 331);
             this.reset.Name = "reset";
             this.reset.Size = new System.Drawing.Size(75, 23);
             this.reset.TabIndex = 3;
