@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ineffable_ERJ_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
       <HintPath>..\..\..\..\..\..\Emgu\emgucv-windows-universal 3.0.0.2157\bin\Emgu.CV.dll</HintPath>
@@ -129,6 +132,7 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ineffable_ERJ_icon.ico" />
     <Content Include="msvcp120.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
