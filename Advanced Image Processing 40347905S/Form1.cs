@@ -59,7 +59,7 @@ namespace Advanced_Image_Processing_40347905S
             if (flag)
             {
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                saveFileDialog1.Filter = "Jpeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+                saveFileDialog1.Filter = "Bitmap Image|*.bmp|Jpeg Image|*.jpg|Gif Image|*.gif";
                 saveFileDialog1.Title = "Save an Image File";
                 saveFileDialog1.ShowDialog();
                 // If the file name is not an empty string open it for saving.
@@ -73,12 +73,11 @@ namespace Advanced_Image_Processing_40347905S
                     switch (saveFileDialog1.FilterIndex)
                     {
                         case 1:
-                            this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
-                            break;
-                        case 2:
                             this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
                             break;
-
+                        case 2:
+                            this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            break;
                         case 3:
                             this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Gif);
                             break;
