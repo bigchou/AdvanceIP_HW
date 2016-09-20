@@ -58,31 +58,38 @@ namespace Advanced_Image_Processing_40347905S
         {
             if (flag)
             {
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                saveFileDialog1.Filter = "Bitmap Image|*.bmp|Jpeg Image|*.jpg|Gif Image|*.gif";
-                saveFileDialog1.Title = "Save an Image File";
-                saveFileDialog1.ShowDialog();
-                // If the file name is not an empty string open it for saving.
-                if (saveFileDialog1.FileName != "")
+                if (pictureBox2 == null || pictureBox2.Image == null)
                 {
-                    // Saves the Image via a FileStream created by the OpenFile method.
-                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
-                    // Saves the Image in the appropriate ImageFormat based upon the
-                    // File type selected in the dialog box.
-                    // NOTE that the FilterIndex property is one-based.
-                    switch (saveFileDialog1.FilterIndex)
+                    MessageBox.Show("Your result image is empty! Please select an effect option!");
+                }
+                else
+                {
+                    SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                    saveFileDialog1.Filter = "Bitmap Image|*.bmp|Jpeg Image|*.jpg|Gif Image|*.gif";
+                    saveFileDialog1.Title = "Save an Image File";
+                    saveFileDialog1.ShowDialog();
+                    // If the file name is not an empty string open it for saving.
+                    if (saveFileDialog1.FileName != "")
                     {
-                        case 1:
-                            this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
-                            break;
-                        case 2:
-                            this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
-                            break;
-                        case 3:
-                            this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Gif);
-                            break;
+                        // Saves the Image via a FileStream created by the OpenFile method.
+                        System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                        // Saves the Image in the appropriate ImageFormat based upon the
+                        // File type selected in the dialog box.
+                        // NOTE that the FilterIndex property is one-based.
+                        switch (saveFileDialog1.FilterIndex)
+                        {
+                            case 1:
+                                this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
+                                break;
+                            case 2:
+                                this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                break;
+                            case 3:
+                                this.pictureBox2.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Gif);
+                                break;
+                        }
+                        fs.Close();
                     }
-                    fs.Close();
                 }
             }
             else
