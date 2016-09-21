@@ -112,5 +112,16 @@ namespace Advanced_Image_Processing_40347905S
                 MessageBox.Show("Please select an image to continue...");
             }
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+             this.linkLabel1.LinkVisited = true;
+             System.Diagnostics.Process.Start("https://github.com/bigchou/AdvanceIP_HW"); // linking
+        }
+
+        private void toHistogram_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
