@@ -121,7 +121,41 @@ namespace Advanced_Image_Processing_40347905S
 
         private void toHistogram_Click(object sender, EventArgs e)
         {
+            int[] count = new int[256]; // 0-255
+            Image<Bgr, byte> img = new Image<Bgr, byte>(beforeBitmap);
+            Byte[,,] data = img.Data; // pass by reference to 3d matrix
+            for (int i = 0; i < img.Rows; i++)
+            {
+                for (int j = 0; j < img.Cols; j++)
+                {
+                    int sum = 0;
+                    for (int k = 0; k < 3; k++)
+                    {
+                        sum += data[i, j, k];
+                    }
+                    count[sum / 3] += 1;
+                }
+            }
+            //for (int i = 0; i < 256; i++)
+            //    Console.WriteLine(i.ToString()+' '+count[i].ToString());
 
+
+
+            Image<Bgr, Byte> histogram = new Image<Bgr, Byte>(256, 203, new Bgr(255, 255, 255));
+            Byte[, ,] hdata = histogram.Data; // pass by reference to 3d matrix
+            Console.WriteLine("Height:"+histogram.Height.ToString()+" Width:"+histogram.Width.ToString());
+            for (int i = 0; i < 256; i++)
+            {
+                for (int j = histogram.Height-1; j>(histogram.Height-count[i]) ; j--)
+                {
+                    if (j < 0)
+                        break;
+                    for (int k = 0; k < 3; k++)
+                        hdata[j, i, k] = 0;
+                }
+            }
+            pictureBox2.Image = histogram.ToBitmap();
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }
 }

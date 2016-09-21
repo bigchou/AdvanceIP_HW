@@ -171,6 +171,7 @@
             this.toHistogram.Size = new System.Drawing.Size(75, 23);
             this.toHistogram.TabIndex = 12;
             this.toHistogram.Text = "HW2";
+            this.toolTip1.SetToolTip(this.toHistogram, "Generate Histogram");
             this.toHistogram.UseVisualStyleBackColor = true;
             this.toHistogram.Click += new System.EventHandler(this.toHistogram_Click);
             // 
