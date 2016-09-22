@@ -136,17 +136,19 @@ namespace Advanced_Image_Processing_40347905S
                     count[sum / 3] += 1;
                 }
             }
+            int total = (int)((double)count.Max());
             //for (int i = 0; i < 256; i++)
             //    Console.WriteLine(i.ToString()+' '+count[i].ToString());
 
-
+            //Console.WriteLine(total);
 
             Image<Bgr, Byte> histogram = new Image<Bgr, Byte>(256, 203, new Bgr(255, 255, 255));
             Byte[, ,] hdata = histogram.Data; // pass by reference to 3d matrix
             Console.WriteLine("Height:"+histogram.Height.ToString()+" Width:"+histogram.Width.ToString());
             for (int i = 0; i < 256; i++)
             {
-                for (int j = histogram.Height-1; j>(histogram.Height-count[i]) ; j--)
+                double val = (double)count[i] / total;
+                for (int j = histogram.Height-1; j> Math.Ceiling(histogram.Height*(1.0-val)) ; j--)
                 {
                     if (j < 0)
                         break;
