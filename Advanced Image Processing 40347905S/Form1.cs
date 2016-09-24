@@ -121,43 +121,55 @@ namespace Advanced_Image_Processing_40347905S
 
         private void toHistogram_Click(object sender, EventArgs e)
         {
-            int[] count = new int[256]; // 0-255
-            Image<Bgr, byte> img = new Image<Bgr, byte>(beforeBitmap);
-            Byte[,,] data = img.Data; // pass by reference to 3d matrix
-            for (int i = 0; i < img.Rows; i++)
+            if (flag == true)
             {
-                for (int j = 0; j < img.Cols; j++)
+                // Build frequency table
+                int[] count = new int[256]; // 0-255
+                Image<Bgr, byte> img = new Image<Bgr, byte>(beforeBitmap);
+                Byte[, ,] data = img.Data; // pass by reference to 3d matrix
+                for (int i = 0; i < img.Rows; i++)
                 {
-                    int sum = 0;
-                    for (int k = 0; k < 3; k++)
+                    for (int j = 0; j < img.Cols; j++)
                     {
-                        sum += data[i, j, k];
+                        int sum = 0;
+                        for (int k = 0; k < 3; k++)
+                        {
+                            sum += data[i, j, k];
+                        }
+                        count[sum / 3] += 1;
                     }
-                    count[sum / 3] += 1;
                 }
-            }
-            int total = (int)((double)count.Max());
-            //for (int i = 0; i < 256; i++)
-            //    Console.WriteLine(i.ToString()+' '+count[i].ToString());
+                //for (int i = 0; i < 256; i++)
+                //    Console.WriteLine(i.ToString()+' '+count[i].ToString());
 
-            //Console.WriteLine(total);
-
-            Image<Bgr, Byte> histogram = new Image<Bgr, Byte>(256, 203, new Bgr(255, 255, 255));
-            Byte[, ,] hdata = histogram.Data; // pass by reference to 3d matrix
-            Console.WriteLine("Height:"+histogram.Height.ToString()+" Width:"+histogram.Width.ToString());
-            for (int i = 0; i < 256; i++)
-            {
-                double val = (double)count[i] / total;
-                for (int j = histogram.Height-1; j> Math.Ceiling(histogram.Height*(1.0-val)) ; j--)
+                // Drawing histogram
+                Image<Bgr, Byte> histogram = new Image<Bgr, Byte>(256, 203, new Bgr(255, 255, 255));
+                Byte[, ,] hdata = histogram.Data; // pass by reference to 3d matrix
+                Console.WriteLine("Height:" + histogram.Height.ToString() + " Width:" + histogram.Width.ToString());
+                double upperbound = Math.Ceiling(count.Max() * 1.1);
+                for (int i = 0; i < 256; i++)
                 {
-                    if (j < 0)
-                        break;
-                    for (int k = 0; k < 3; k++)
-                        hdata[j, i, k] = 0;
+                    double val = (double)count[i] / upperbound;
+                    for (int j = histogram.Height - 1; j > Math.Floor(histogram.Height * (1.0 - val)); j--)
+                    {
+                        if (j < 0)
+                            break;
+                        for (int k = 0; k < 3; k++)
+                            hdata[j, i, k] = 0;
+                    }
                 }
+                pictureBox2.Image = histogram.ToBitmap();
+                pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+                // description
+                
+                MessageBox.Show("Set the vertical y-axis limits to [0," + ((int)upperbound).ToString() + "],\nand the horizontal x-axis limits to [0,255]","Description");
             }
-            pictureBox2.Image = histogram.ToBitmap();
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            else
+            {
+                MessageBox.Show("Please select an image to continue...");
+            }
+            
         }
     }
 }
