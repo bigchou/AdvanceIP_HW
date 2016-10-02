@@ -37,12 +37,12 @@
             this.save_img = new System.Windows.Forms.Button();
             this.copy = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toHistogram = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.toHistogram = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -117,6 +117,17 @@
             this.copy.UseVisualStyleBackColor = true;
             this.copy.Click += new System.EventHandler(this.copy_Click);
             // 
+            // toHistogram
+            // 
+            this.toHistogram.Location = new System.Drawing.Point(458, 100);
+            this.toHistogram.Name = "toHistogram";
+            this.toHistogram.Size = new System.Drawing.Size(75, 23);
+            this.toHistogram.TabIndex = 12;
+            this.toHistogram.Text = "HW2";
+            this.toolTip1.SetToolTip(this.toHistogram, "Generate Histogram");
+            this.toHistogram.UseVisualStyleBackColor = true;
+            this.toHistogram.Click += new System.EventHandler(this.toHistogram_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -163,17 +174,6 @@
             this.label5.Size = new System.Drawing.Size(30, 12);
             this.label5.TabIndex = 11;
             this.label5.Text = "result";
-            // 
-            // toHistogram
-            // 
-            this.toHistogram.Location = new System.Drawing.Point(458, 100);
-            this.toHistogram.Name = "toHistogram";
-            this.toHistogram.Size = new System.Drawing.Size(75, 23);
-            this.toHistogram.TabIndex = 12;
-            this.toHistogram.Text = "HW2";
-            this.toolTip1.SetToolTip(this.toHistogram, "Generate Histogram");
-            this.toHistogram.UseVisualStyleBackColor = true;
-            this.toHistogram.Click += new System.EventHandler(this.toHistogram_Click);
             // 
             // Form1
             // 

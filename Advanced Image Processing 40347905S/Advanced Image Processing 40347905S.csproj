@@ -7,8 +7,8 @@
     <ProjectGuid>{C50AC861-E362-443B-85A3-53E18C862509}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Advanced_Image_Processing_40347905S</RootNamespace>
-    <AssemblyName>Advanced Image Processing 40347905S</AssemblyName>
+    <RootNamespace>HW1</RootNamespace>
+    <AssemblyName>HW1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -23,7 +23,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ProductName>HW1</ProductName>
+    <SuiteName>HW1</SuiteName>
+    <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -123,53 +123,59 @@ namespace Advanced_Image_Processing_40347905S
         {
             if (flag == true)
             {
-                // Build frequency table
-                int[] count = new int[256]; // 0-255
-                Image<Bgr, byte> img = new Image<Bgr, byte>(beforeBitmap);
-                Byte[, ,] data = img.Data; // pass by reference to 3d matrix
-                for (int i = 0; i < img.Rows; i++)
-                {
-                    for (int j = 0; j < img.Cols; j++)
-                    {
-                        int sum = 0;
-                        for (int k = 0; k < 3; k++)
-                        {
-                            sum += data[i, j, k];
-                        }
-                        count[sum / 3] += 1;
-                    }
-                }
-                //for (int i = 0; i < 256; i++)
-                //    Console.WriteLine(i.ToString()+' '+count[i].ToString());
-
-                // Drawing histogram
-                Image<Bgr, Byte> histogram = new Image<Bgr, Byte>(256, 203, new Bgr(255, 255, 255));
-                Byte[, ,] hdata = histogram.Data; // pass by reference to 3d matrix
-                Console.WriteLine("Height:" + histogram.Height.ToString() + " Width:" + histogram.Width.ToString());
-                double upperbound = Math.Ceiling(count.Max() * 1.1);
-                for (int i = 0; i < 256; i++)
-                {
-                    double val = (double)count[i] / upperbound;
-                    for (int j = histogram.Height - 1; j > Math.Floor(histogram.Height * (1.0 - val)); j--)
-                    {
-                        if (j < 0)
-                            break;
-                        for (int k = 0; k < 3; k++)
-                            hdata[j, i, k] = 0;
-                    }
-                }
-                pictureBox2.Image = histogram.ToBitmap();
+                Bitmap histogram;
+                int upperbound;
+                GetHistogram(beforeBitmap,out upperbound, out histogram);
+                pictureBox2.Image = histogram;
                 pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-
-                // description
-                
-                MessageBox.Show("Set the vertical y-axis limits to [0," + ((int)upperbound).ToString() + "],\nand the horizontal x-axis limits to [0,255]","Description");
+                MessageBox.Show("Set the vertical y-axis limits to [0," + ((int)upperbound).ToString() + "],\nand the horizontal x-axis limits to [0,255]", "Description");
             }
             else
             {
                 MessageBox.Show("Please select an image to continue...");
             }
             
+        }
+
+        public static void GetHistogram(Bitmap beforeBitmap, out int height, out Bitmap histo)
+        {
+            // Build frequency table
+            int[] count = new int[256]; // 0-255
+            Image<Bgr, byte> img = new Image<Bgr, byte>(beforeBitmap);
+            Byte[, ,] data = img.Data; // pass by reference to 3d matrix
+            for (int i = 0; i < img.Rows; i++)
+            {
+                for (int j = 0; j < img.Cols; j++)
+                {
+                    int sum = 0;
+                    for (int k = 0; k < 3; k++)
+                    {
+                        sum += data[i, j, k];
+                    }
+                    count[sum / 3] += 1;
+                }
+            }
+            //for (int i = 0; i < 256; i++)
+            //    Console.WriteLine(i.ToString()+' '+count[i].ToString());
+
+            // Drawing histogram
+            Image<Bgr, Byte> histogram = new Image<Bgr, Byte>(256, 203, new Bgr(255, 255, 255));
+            Byte[, ,] hdata = histogram.Data; // pass by reference to 3d matrix
+            Console.WriteLine("Height:" + histogram.Height.ToString() + " Width:" + histogram.Width.ToString());
+            double upperbound = Math.Ceiling(count.Max() * 1.1);
+            for (int i = 0; i < 256; i++)
+            {
+                double val = (double)count[i] / upperbound;
+                for (int j = histogram.Height - 1; j > Math.Floor(histogram.Height * (1.0 - val)); j--)
+                {
+                    if (j < 0)
+                        break;
+                    for (int k = 0; k < 3; k++)
+                        hdata[j, i, k] = 0;
+                }
+            }
+            height = (int)upperbound;
+            histo = histogram.ToBitmap();
         }
     }
 }
