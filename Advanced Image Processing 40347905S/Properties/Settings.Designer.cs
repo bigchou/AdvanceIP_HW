@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HW1.Properties {
+namespace Advanced_Image_Processing_40347905S.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

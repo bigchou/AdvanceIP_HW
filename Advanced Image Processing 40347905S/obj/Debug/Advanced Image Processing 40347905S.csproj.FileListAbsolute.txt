@@ -104,3 +104,4 @@ C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debu
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form1.resources
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Properties.Resources.resources
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csproj.GenerateResource.Cache
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\HW1.exe.config
