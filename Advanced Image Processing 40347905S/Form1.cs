@@ -477,7 +477,21 @@ namespace Advanced_Image_Processing_40347905S
                 for (int i = 0; i < img.Height; i++)
                     for (int j = 0; j < img.Width; j++)
                     {
-                        GauNoise[i, j] = Math.Floor((1.0 / (max - min) * (GauNoise[i, j] - min)) * 255.0);
+                        double val;
+                        if (max == 0.0 && min == 0.0)
+                            val = 0.0;
+                        else
+                            val = Math.Floor((1.0 / (max - min) * (GauNoise[i, j] - min)) * 255.0);
+
+
+
+                        if (val > 255.0)
+                            GauNoise[i, j] = 255.0;
+                        else if (val < 0.0)
+                            GauNoise[i, j] = 0.0;
+                        else
+                            GauNoise[i, j] = val;
+
                         for (int k = 0; k < 3; k++)
                             noise[i, j, k] = Convert.ToByte((int)GauNoise[i, j]);
                     }
