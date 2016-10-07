@@ -138,18 +138,19 @@ namespace Advanced_Image_Processing_40347905S
         }
         public static void Gaussian_approximation(Image<Bgr, byte> img, out Bitmap noisemodel, out Bitmap result, double sigma)
         {
-            // Generate PDF of Gaussian
-            double[] valtable = new double[256];
             double mean = 0.0, std = 128.0, var = std * std;
-            for (int i = 0; i < 256; i++)
+            int size = 1024;
+            // Generate PDF of Gaussian
+            double[] valtable = new double[size];
+            for (int i = 0; i < size; i++)
             {
-                valtable[i] = Math.Exp(-1.0 * ((double)(i - 128) - mean) * ((double)(i - 128) - mean) / (2 * var)) / (Math.Sqrt(Math.PI * 2) * std);
+                valtable[i] = Math.Exp(-1.0 * ((double)(i - size/2) - mean) * ((double)(i - size/2) - mean) / (2 * var)) / (Math.Sqrt(Math.PI * 2) * std);
                 //Console.WriteLine(valtable[i]);
             }
             // find max and min
             double max = valtable[0];
             double min = valtable[0];
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < size; i++)
             {
                 if (max < valtable[i])
                     max = valtable[i];
@@ -157,14 +158,14 @@ namespace Advanced_Image_Processing_40347905S
                     min = valtable[i];
             }
             // GraySacale Stretch
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < size; i++)
             {
                 valtable[i] = 255.0 / (max - min) * (valtable[i] - min);
                 //Console.WriteLine(valtable[i]);
             }
             // Generate Gaussian Sequence
             List<double> Gaussian = new List<double>();
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < valtable[i]; j++)
                 {
@@ -213,6 +214,21 @@ namespace Advanced_Image_Processing_40347905S
                     //Console.WriteLine(noise[i,j]);
                 }  
             }
+            //test
+            /*
+            for (int i = 0; i < img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    int val = (int)(255.0 / (max - min) * (noise[i, j] - min));
+                    if(val > 255)
+                        Console.WriteLine(255);
+                    else if(val < 0)
+                        Console.WriteLine(0);
+                    else
+                        Console.WriteLine(noise[i, j]);
+                }
+            }*/
 
 
 
@@ -264,7 +280,6 @@ namespace Advanced_Image_Processing_40347905S
                 for (int j = 0; j < img.Width; j++)
                 {
                     noise[i, j] = 255.0 / (max - min) * (noise[i, j] - min);
-                    //Console.WriteLine(GNoise[i, j]);
                     int val = (int)Math.Floor(noise[i, j]);
                     if (val > 255)
                         val = 255;
