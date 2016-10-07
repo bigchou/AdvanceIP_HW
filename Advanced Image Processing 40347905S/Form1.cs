@@ -355,8 +355,8 @@ namespace Advanced_Image_Processing_40347905S
                         min = XNoise[i, j];
                 }
             }
-            Console.WriteLine(min);
-            Console.WriteLine(max);
+            //Console.WriteLine(min);
+            //Console.WriteLine(max);
             // GraySacale Stretch
             Image<Bgr, Byte> G = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
             Byte[, ,] ndata = G.Data; // Pass by reference to 3d matrix
@@ -497,8 +497,8 @@ namespace Advanced_Image_Processing_40347905S
                     }
                 noisemodel = noiseimg.ToBitmap();
                 result = img.ToBitmap();
-                Console.WriteLine(min);
-                Console.WriteLine(max);
+                //Console.WriteLine(min);
+                //Console.WriteLine(max);
         }
         public static void toGray(Bitmap img, out Image<Bgr, byte> grayimg)
         {
@@ -541,7 +541,17 @@ namespace Advanced_Image_Processing_40347905S
                         Central_Limit_Theorem(img, out noisemodel, out result, sigma);
                     else
                         Gaussian_approximation(img, out noisemodel, out result, sigma);
-                        
+
+                    // test
+                    /*
+                    for (int i = 0; i < 1000; i++) {
+                        Console.WriteLine("BM");
+                        BoxMuller(img, out noisemodel, out result, i);
+                        Console.WriteLine("CLT");
+                        Central_Limit_Theorem(img, out noisemodel, out result, i);
+                        Console.WriteLine("GA");
+                        Gaussian_approximation(img, out noisemodel, out result, i);
+                    }*/
                         
                     
                     // genereate histogram
