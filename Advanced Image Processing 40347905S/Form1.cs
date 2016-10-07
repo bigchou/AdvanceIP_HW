@@ -136,9 +136,152 @@ namespace Advanced_Image_Processing_40347905S
             }
             
         }
-
-        public static void Central_Limit_Theorem(int height,int width, out Bitmap result)
+        public static void Gaussian_approximation(Image<Bgr, byte> img, out Bitmap noisemodel, out Bitmap result, double sigma)
         {
+            // Generate PDF of Gaussian
+            double[] valtable = new double[256];
+            double mean = 0.0, std = 128.0, var = std * std;
+            for (int i = 0; i < 256; i++)
+            {
+                valtable[i] = Math.Exp(-1.0 * ((double)(i - 128) - mean) * ((double)(i - 128) - mean) / (2 * var)) / (Math.Sqrt(Math.PI * 2) * std);
+                //Console.WriteLine(valtable[i]);
+            }
+            // find max and min
+            double max = valtable[0];
+            double min = valtable[0];
+            for (int i = 0; i < 256; i++)
+            {
+                if (max < valtable[i])
+                    max = valtable[i];
+                if (min > valtable[i])
+                    min = valtable[i];
+            }
+            // GraySacale Stretch
+            for (int i = 0; i < 256; i++)
+            {
+                valtable[i] = 255.0 / (max - min) * (valtable[i] - min);
+                //Console.WriteLine(valtable[i]);
+            }
+            // Generate Gaussian Sequence
+            List<double> Gaussian = new List<double>();
+            for (int i = 0; i < 256; i++)
+            {
+                for (int j = 0; j < valtable[i]; j++)
+                {
+                    Gaussian.Add(i);
+                }
+            }
+
+
+            // Generate Noise Model
+            double[,] noise = new double[img.Height,img.Width];
+            Random rnd = new Random();
+            for (int i = 0; i < img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    noise[i, j] = Gaussian[rnd.Next() % Gaussian.Count];
+                    //Console.WriteLine(noise[i, j]);
+                }
+            }
+
+
+
+
+
+            // find max and min
+            max = noise[0,0];
+            min = noise[0,0];
+            for (int i = 0; i < img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    if (max < noise[i,j])
+                        max = noise[i,j];
+                    if (min > noise[i,j])
+                        min = noise[i,j];
+                }
+            }
+            //Console.WriteLine(min);
+            //Console.WriteLine(max);
+            // GraySacale Stretch
+            for (int i = 0; i < img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    noise[i,j] = (10.0 / (max - min) * (noise[i,j] - min) - 5.0) * sigma;
+                    //Console.WriteLine(noise[i,j]);
+                }  
+            }
+
+
+
+            //================================
+
+
+            Byte[, ,] idata = img.Data;
+            for (int i = 0; i < img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    int val = idata[i, j, 0];
+                    val += (int)Math.Floor(noise[i, j]);
+                    if (val > 255)
+                        val = 255;
+                    else if (val < 0)
+                        val = 0;
+                    for (int k = 0; k < 3; k++)
+                    {
+                        idata[i, j, k] = Convert.ToByte(val);
+                    }
+                }
+            }
+            result = img.ToBitmap();
+
+
+
+
+
+
+
+            // find max and min
+            max = noise[0, 0];
+            min = noise[0, 0];
+            for (int i = 0; i < img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    if (max < noise[i, j])
+                        max = noise[i, j];
+                    if (min > noise[i, j])
+                        min = noise[i, j];
+                }
+            }
+            Image<Bgr, Byte> G = new Image<Bgr, Byte>(img.Width, img.Height, new Bgr(255, 255, 255));
+            Byte[, ,] ndata = G.Data; // Pass by reference to 3d matrix
+            for (int i = 0; i <img.Height; i++)
+            {
+                for (int j = 0; j < img.Width; j++)
+                {
+                    noise[i, j] = 255.0 / (max - min) * (noise[i, j] - min);
+                    //Console.WriteLine(GNoise[i, j]);
+                    int val = (int)Math.Floor(noise[i, j]);
+                    if (val > 255)
+                        val = 255;
+                    else if (val < 0)
+                        val = 0;
+                    for (int k = 0; k < 3; k++)
+                    {
+                        ndata[i, j, k] = Convert.ToByte(val);
+                    }
+                }
+            }
+            noisemodel = G.ToBitmap();
+        }
+
+        public static void Central_Limit_Theorem(Image<Bgr, byte> img, out Bitmap noisemodel, out Bitmap result, double sigma)
+        {
+            int height = img.Height, width = img.Width;
             // Central Limit 
             double min = 0.0, max = 0.0;
             double[,] XNoise = new double[height, width];
@@ -155,9 +298,35 @@ namespace Advanced_Image_Processing_40347905S
                     }
                     sum -= (double)samples / 2.0;
                     sum /= Math.Sqrt((double)samples / 12.0);
-                    XNoise[i, j] = sum;
+                    XNoise[i, j] = sum * sigma;
                 }
             }
+            // Print
+            /*
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < width; j++)
+                    Console.WriteLine(XNoise[i, j]);
+             */
+            Byte[, ,] idata = img.Data;
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    int val = idata[i, j, 0];
+                    val += (int)Math.Floor(XNoise[i, j]);
+                    if (val > 255)
+                        val = 255;
+                    else if (val < 0)
+                        val = 0;
+                    for (int k = 0; k < 3; k++)
+                    {
+                        idata[i, j, k] = Convert.ToByte(val);
+                    }
+                }
+            }
+            result = img.ToBitmap();
+
+            // ====== Display Noise Model =====
             // find max and min
             max = XNoise[0, 0];
             min = XNoise[0, 0];
@@ -171,38 +340,29 @@ namespace Advanced_Image_Processing_40347905S
                         min = XNoise[i, j];
                 }
             }
+            Console.WriteLine(min);
+            Console.WriteLine(max);
             // GraySacale Stretch
+            Image<Bgr, Byte> G = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
+            Byte[, ,] ndata = G.Data; // Pass by reference to 3d matrix
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    XNoise[i, j] = 1.0 / (max - min) * (XNoise[i, j] - min);
+                    XNoise[i, j] = 255.0 / (max - min) * (XNoise[i, j] - min);
                     //Console.WriteLine(GNoise[i, j]);
-                }
-            }
-
-
-            Image<Bgr, Byte> G = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
-            Byte[, ,] ndata = G.Data; // Pass by reference to 3d matrix
-            result = G.ToBitmap();
-            // Generate Noise Model (only for display use)
-            /*
-            sigma = 255.0;
-            for (int i = 0; i < img.Height; i++)
-            {
-                for (int j = 0; j < img.Width; j++)
-                {
+                    int val = (int)Math.Floor(XNoise[i, j]);
+                    if (val > 255)
+                        val = 255;
+                    else if (val < 0)
+                        val = 0;
                     for (int k = 0; k < 3; k++)
                     {
-                        int val = (int)Math.Floor(XNoise[i, j] * sigma);
-                        if (val > 255)
-                            val = 255;
-                        else if (val < 0)
-                            val = 0;
                         ndata[i, j, k] = Convert.ToByte(val);
                     }
                 }
-            }*/
+            }
+            noisemodel = G.ToBitmap();
         }
         public static void GetHistogram(Bitmap beforeBitmap, out int height, out Bitmap histo)
         {
@@ -244,12 +404,15 @@ namespace Advanced_Image_Processing_40347905S
             height = (int)upperbound;
             histo = histogram.ToBitmap();
         }
-        public static void BoxMuller(Image<Bgr,byte> img, out Bitmap noisemodel, out Bitmap result){
+        
+        public static void BoxMuller(Image<Bgr,byte> img, out Bitmap noisemodel, out Bitmap result,double sigma){
                 // Noise Model
                 Byte[, ,] data = img.Data;
-                double sigma = 60.0, gamma = 0.0, phi = 0.0, z = 0.0;
-                //double[,] old = new double[img.Height, img.Width];
-                //double[,] GNoise = new double[img.Height, img.Width];
+                double gamma = 0.0, phi = 0.0, z = 0.0;
+                
+
+
+
                 double[,] GauNoise = new double[img.Height, img.Width];
                 double min = 0.0, max = 0.0;
                 Random rnd = new Random();
@@ -257,7 +420,6 @@ namespace Advanced_Image_Processing_40347905S
                 {
                     for (int j = 0; j < img.Width; j++)
                     {
-                        //old[i,j] = data[i, j, 0]; 
                         if (j % 2 == 0)
                         {
                             gamma = rnd.NextDouble();
@@ -281,20 +443,6 @@ namespace Advanced_Image_Processing_40347905S
                             data[i, j, k] = (Convert.ToByte(z));
                     }
                 }
-                /*
-                // subtraction
-                Image<Bgr, Byte> GGNoise = new Image<Bgr, Byte>(img.Width, img.Height, new Bgr(255, 255, 255));
-                Byte[, ,] noisedata = GGNoise.Data; // Pass by reference to 3d matrix
-                
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        old[i, j] -= data[i, j, 0];
-                    }
-                }*/
-                
-                
                 // find max and min
                 max = GauNoise[0, 0];
                 min = GauNoise[0, 0];
@@ -314,296 +462,14 @@ namespace Advanced_Image_Processing_40347905S
                 for (int i = 0; i < img.Height; i++)
                     for (int j = 0; j < img.Width; j++)
                     {
-                        GauNoise[i, j] = Math.Floor((1.0 / (max - min) * (GauNoise[i, j] - min)) * sigma);
+                        GauNoise[i, j] = Math.Floor((1.0 / (max - min) * (GauNoise[i, j] - min)) * 255.0);
                         for (int k = 0; k < 3; k++)
                             noise[i, j, k] = Convert.ToByte((int)GauNoise[i, j]);
                     }
                 noisemodel = noiseimg.ToBitmap();
                 result = img.ToBitmap();
-
-
-
-                /*
-                // Generate Noise Model
-                sigma = 20.0;
-                Image<Bgr, Byte> GGNoise = new Image<Bgr, Byte>(img.Width, img.Height, new Bgr(255, 255, 255));
-                Byte[, ,] noisedata = GGNoise.Data; // Pass by reference to 3d matrix
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        int val = (int)Math.Floor(GNoise[i, j] * sigma);
-                        if (val > 255)
-                            val = 255;
-                        else if (val < 0)
-                            val = 0;
-                        for (int k = 0; k < 3; k++)
-                        {
-                            noisedata[i, j, k] = Convert.ToByte(val);
-                        }
-                    }
-                }
-
-                // add noise model to the image
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        for (int k = 0; k < 3; k++)
-                        {
-                            data[i, j, k] += noisedata[i, j, k];
-                        }
-                    }
-                }*/
-
-
-
-
-
-
-
-
-
-
-
-
-                    /*
-                    for (int i = 0; i < img.Height; i+=2)
-                    {
-                        if (i+1 == img.Height)
-                            break;
-                        for (int j = 0; j < img.Width; j++)
-                        {
-                            gamma = rnd.NextDouble();
-                            phi = rnd.NextDouble();
-                            z1 = sigma * Math.Sqrt(-2.0 * Math.Log(gamma)) * Math.Cos(2.0 * Math.PI * phi);
-                            z2 = sigma * Math.Sqrt(-2.0 * Math.Log(gamma)) * Math.Sin(2.0 * Math.PI * phi);
-                            GNoise[i, j] = z1;
-                            GNoise[i+1, j] = z2;
-                        }
-                    }
-                    // handle the last round if the height of image is odd number
-                    if (img.Height % 2 != 0)
-                    {
-                        for (int j = 0; j < img.Width; j++)
-                        {
-                            gamma = rnd.NextDouble();
-                            phi = rnd.NextDouble();
-                            z1 = sigma * Math.Sqrt(-2.0 * Math.Log(gamma)) * Math.Cos(2.0 * Math.PI * phi);
-                            GNoise[img.Height-1, j] = z1;
-                        }
-                    }*/
-
-
-
-
-                    // Central Limit Theorem
-                    /*int samples = 12;
-                    for (int i = 0; i < 1000; i++)
-                    {
-                        double sum = 0.0;
-                        for (int j = 0; j < samples; j++)
-                        {
-                            sum += rnd.NextDouble();
-                        }
-                        sum -= (double)samples / 2.0;
-                        sum /= Math.Sqrt((double)samples / 12.0);
-                        Console.WriteLine(sum);
-                    }*/
-
-
-
-
-
-
-
-
-
-
-                    /*
-                    double sum = 0;
-                    for (int i = 0; i < img.Rows; i++)
-                        for (int j = 0; j < img.Cols; j++)
-                            sum += data[i, j, 0];
-                    int count = img.Rows * img.Cols;
-                    double mean = sum / count;
-                    double[,] GauNoise = new double[100, 10];
-                    double temp = 0;
-                    for (int i = 0; i < img.Rows; i++)
-                        for (int j = 0; j < img.Cols; j++)
-                        {
-                            double val = data[i, j, 0];
-                            temp += ((val - mean) * (val - mean));
-                        }
-                    double std = Math.Sqrt(temp / (count - 1));
-                    double var = std * std;
-                
-                
-                
-                    for (int i = 0; i < 100; i++)
-                        for (int j = 0; j < 10; j++)
-                        {
-                            GauNoise[i, j] = Math.Exp(-1.0 * ((double)i - mean) * ((double)i - mean) / (2 * var)) / (Math.Sqrt(Math.PI * 2) * std);
-                            //Console.WriteLine(GauNoise[i, j]);
-                        }
-                    // find max and min
-                    max = GauNoise[0, 0];
-                    min = GauNoise[0, 0];
-                    for (int i = 0; i < 100; i++)
-                    {
-                        for (int j = 0; j < 10; j++)
-                        {
-                            if (GauNoise[i, j] > max)
-                                max = GauNoise[i, j];
-                            if (min > GauNoise[i, j])
-                                min = GauNoise[i, j];
-                        }
-                    }
-                    // GraySacale Stretch
-                    int[,] hhh = new int[100,10];
-                    for (int i = 0; i < 100; i++)
-                    {
-                        for (int j = 0; j < 10; j++)
-                        {
-                            GauNoise[i, j] = 1.0 / (max - min) * (GauNoise[i, j] - min);
-                           hhh[i,j] = (int)Math.Floor(GauNoise[i, j]*255);
-                            Console.WriteLine(hhh[i,j]);
-                        }
-                    }*/
-
-
-
-
-                    // version 1
-                    /*
-                    double sum = 0;
-                    for (int i = 0; i < img.Rows; i++)
-                        for (int j = 0; j < img.Cols; j++)
-                            sum += data[i, j, 0];
-                    int count = img.Rows * img.Cols;
-                    double mean = sum / count;
-                    double temp = 0;
-                    for(int i=0;i<img.Rows;i++)
-                        for(int j=0;j<img.Cols;j++)
-                        {
-                            double val = data[i,j,0];
-                            temp+= ((val-mean)*(val-mean));
-                        }
-                    double std = Math.Sqrt(temp / (count - 1));
-                    double var = std * std;
-                 
-
-                    mean = 0;
-                    //Console.WriteLine("mean: " + mean.ToString());
-                    Console.WriteLine("std: "+std.ToString());
-                    Console.WriteLine("variance: " + var.ToString());
-                    double[] arr = new double[256];
-                    for (int i = 0; i < 256; i++)
-                    {
-                        arr[i] = Math.Exp(-1.0 * ((double)i - mean) * ((double)i - mean) / (2 * var)) / (Math.Sqrt(Math.PI * 2) * std);
-                        // Console.WriteLine(i.ToString()+": "+arr[i].ToString());
-                        // Console.WriteLine(arr[i]);
-                    }
-                    Image<Bgr, Byte> GNoise = new Image<Bgr, Byte>(img.Width, img.Height, new Bgr(255, 255, 255));
-
-                
-                    int[] arr2 = new int[256];
-                    for (int i = 0; i < 256; i++)
-                    {
-                        arr2[i] = 0;
-                        // b = a + sqrt(p4) * randn(sizeA) + p3;
-                        // arr2[i] = arr2[i] + (int)(var * arr[i]) + (int)mean;
-                        Console.WriteLine(arr2[i]);
-                    }
-                    
-                
-                    for (int i = 0; i < img.Rows; i++)
-                        for (int j = 0; j < img.Cols; j++)
-                            for (int k = 0; k < 3; k++)
-                            {
-                                int val = data[i, j, k];
-                                data[i, j, k] = Convert.ToByte(arr2[val]);
-                            }
-                    */
-
-
-
-
-
-
-
-                /*
-                    // find max and min
-                
-                    max = GNoise[0, 0];
-                min = GNoise[0, 0];
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        if (GNoise[i, j] > max)
-                            max = GNoise[i, j];
-                        if (min > GNoise[i, j])
-                            min = GNoise[i, j];
-                    }
-                }
-                // GraySacale Stretch
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        GNoise[i, j] = 1.0 / (max - min) * (GNoise[i, j] - min);
-                        //Console.WriteLine(GNoise[i, j]);
-                    }
-                }
-                // Generate Noise Model
-                sigma = 200.0;
-                Image<Bgr, Byte> GGNoise = new Image<Bgr, Byte>(img.Width, img.Height, new Bgr(255, 255, 255));
-                Byte[, ,] noisedata = GGNoise.Data; // Pass by reference to 3d matrix
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        int val = (int)Math.Floor(GNoise[i, j] * sigma);
-                        if (val > 255)
-                            val = 255;
-                        else if (val < 0)
-                            val = 0;
-                        for (int k = 0; k < 3; k++)
-                        {
-                            noisedata[i, j, k] = Convert.ToByte(val);
-                        }
-                    }
-                }
-
-                // add noise model to the image
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        for (int k = 0; k < 3; k++)
-                        {
-                            data[i, j, k] += noisedata[i, j, k];
-                        }
-                    }
-                }*/
-                // Generate Noise Model (only for display use)
-                /*sigma = 255.0;
-                for (int i = 0; i < img.Height; i++)
-                {
-                    for (int j = 0; j < img.Width; j++)
-                    {
-                        for (int k = 0; k < 3; k++)
-                        {
-                            int val = (int)Math.Floor(GNoise[i, j] * sigma);
-                            if (val > 255)
-                                val = 255;
-                            else if (val < 0)
-                                val = 0;
-                            noisedata[i, j, k] = Convert.ToByte(val);
-                        }
-                    }
-                }*/
+                Console.WriteLine(min);
+                Console.WriteLine(max);
         }
         public static void toGray(Bitmap img, out Image<Bgr, byte> grayimg)
         {
@@ -626,25 +492,38 @@ namespace Advanced_Image_Processing_40347905S
 
         private void ApplyGaussionNoise_Click(object sender, EventArgs e)
         {
+            
             // Additive white Gaussian noise, AWGN
             if (flag == true)
             {
+                // toGray
                 Image<Bgr, byte> img;
-                Bitmap noisemodel, result;
                 toGray(beforeBitmap, out img);
-                BoxMuller(img,out noisemodel,out result);
-
-                // genereate histogram
-                int upperbound;
-                Bitmap histogram;
-                //GetHistogram(img.ToBitmap(), out upperbound, out histogram);
-                GetHistogram(noisemodel, out upperbound, out histogram);
-                
-                pictureBox2.Image = img.ToBitmap();
-                //pictureBox2.Image = old.ToBitmap();
-                pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-                Form2 myhistogram = new Form2(histogram);
-                myhistogram.Show();
+                // select effect
+                Form3 input = new Form3();
+                DialogResult dr = input.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    double sigma = input.GetSigma();
+                    Bitmap noisemodel, result;
+                    if (input.GetMode() == 1)
+                        BoxMuller(img, out noisemodel, out result, sigma);
+                    else if(input.GetMode() == 2)
+                        Central_Limit_Theorem(img, out noisemodel, out result, sigma);
+                    else
+                        Gaussian_approximation(img, out noisemodel, out result, sigma);
+                        
+                        
+                    
+                    // genereate histogram
+                    int upperbound;
+                    Bitmap histogram;
+                    GetHistogram(noisemodel, out upperbound, out histogram);
+                    pictureBox2.Image = result;
+                    pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+                    Form2 myhistogram = new Form2(histogram);
+                    myhistogram.Show();
+                }      
             }
             else
             {

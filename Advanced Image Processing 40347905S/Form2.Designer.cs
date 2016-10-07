@@ -39,7 +39,7 @@
             this.save_img_Click.Name = "save_img_Click";
             this.save_img_Click.Size = new System.Drawing.Size(400, 35);
             this.save_img_Click.TabIndex = 0;
-            this.save_img_Click.Text = "button1";
+            this.save_img_Click.Text = "Save";
             this.save_img_Click.UseVisualStyleBackColor = true;
             this.save_img_Click.Click += new System.EventHandler(this.save_img_Click_Click);
             // 
