@@ -138,8 +138,10 @@ namespace Advanced_Image_Processing_40347905S
         }
         public static void Gaussian_approximation(Image<Bgr, byte> img, out Bitmap noisemodel, out Bitmap result, double sigma)
         {
-            double mean = 0.0, std = 128.0, var = std * std;
-            int size = 1024;
+            int size = 256;
+            double mean = 0.0, std = size / 8;
+            double var = std * std;
+            
             // Generate PDF of Gaussian
             double[] valtable = new double[size];
             for (int i = 0; i < size; i++)
@@ -157,6 +159,8 @@ namespace Advanced_Image_Processing_40347905S
                 if (min > valtable[i])
                     min = valtable[i];
             }
+            //Console.WriteLine(max);
+            //Console.WriteLine(min);
             // GraySacale Stretch
             for (int i = 0; i < size; i++)
             {
@@ -170,7 +174,9 @@ namespace Advanced_Image_Processing_40347905S
                 for (int j = 0; j < valtable[i]; j++)
                 {
                     Gaussian.Add(i);
+                    //Console.WriteLine(i);
                 }
+                
             }
 
 
