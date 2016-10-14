@@ -38,12 +38,13 @@
             this.copy = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toHistogram = new System.Windows.Forms.Button();
+            this.ApplyGaussionNoise = new System.Windows.Forms.Button();
+            this.ConvertColorSpace = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.ApplyGaussionNoise = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -129,6 +130,28 @@
             this.toHistogram.UseVisualStyleBackColor = true;
             this.toHistogram.Click += new System.EventHandler(this.toHistogram_Click);
             // 
+            // ApplyGaussionNoise
+            // 
+            this.ApplyGaussionNoise.Location = new System.Drawing.Point(458, 139);
+            this.ApplyGaussionNoise.Name = "ApplyGaussionNoise";
+            this.ApplyGaussionNoise.Size = new System.Drawing.Size(75, 23);
+            this.ApplyGaussionNoise.TabIndex = 13;
+            this.ApplyGaussionNoise.Text = "HW3";
+            this.toolTip1.SetToolTip(this.ApplyGaussionNoise, "Apply white Gaussion noise to image");
+            this.ApplyGaussionNoise.UseVisualStyleBackColor = true;
+            this.ApplyGaussionNoise.Click += new System.EventHandler(this.ApplyGaussionNoise_Click);
+            // 
+            // ConvertColorSpace
+            // 
+            this.ConvertColorSpace.Location = new System.Drawing.Point(458, 177);
+            this.ConvertColorSpace.Name = "ConvertColorSpace";
+            this.ConvertColorSpace.Size = new System.Drawing.Size(75, 23);
+            this.ConvertColorSpace.TabIndex = 14;
+            this.ConvertColorSpace.Text = "HW4";
+            this.toolTip1.SetToolTip(this.ConvertColorSpace, "Color Space Conversion");
+            this.ConvertColorSpace.UseVisualStyleBackColor = true;
+            this.ConvertColorSpace.Click += new System.EventHandler(this.ConvertColorSpace_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -176,22 +199,12 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "result";
             // 
-            // ApplyGaussionNoise
-            // 
-            this.ApplyGaussionNoise.Location = new System.Drawing.Point(458, 139);
-            this.ApplyGaussionNoise.Name = "ApplyGaussionNoise";
-            this.ApplyGaussionNoise.Size = new System.Drawing.Size(75, 23);
-            this.ApplyGaussionNoise.TabIndex = 13;
-            this.ApplyGaussionNoise.Text = "HW3";
-            this.toolTip1.SetToolTip(this.ApplyGaussionNoise, "Apply white Gaussion noise to image");
-            this.ApplyGaussionNoise.UseVisualStyleBackColor = true;
-            this.ApplyGaussionNoise.Click += new System.EventHandler(this.ApplyGaussionNoise_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 486);
+            this.Controls.Add(this.ConvertColorSpace);
             this.Controls.Add(this.ApplyGaussionNoise);
             this.Controls.Add(this.toHistogram);
             this.Controls.Add(this.label5);
@@ -232,6 +245,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button toHistogram;
         private System.Windows.Forms.Button ApplyGaussionNoise;
+        private System.Windows.Forms.Button ConvertColorSpace;
     }
 }
 

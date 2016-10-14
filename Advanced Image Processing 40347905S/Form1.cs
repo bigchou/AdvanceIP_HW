@@ -575,5 +575,182 @@ namespace Advanced_Image_Processing_40347905S
                 MessageBox.Show("Please select an image to continue...");
             }
         }
+
+        private void ConvertColorSpace_Click(object sender, EventArgs e)
+        {
+            if (flag == true)
+            {
+                
+                Image<Bgr, byte> img = new Image<Bgr, byte>(beforeBitmap);
+                Byte[, ,] data = img.Data;
+                Image<Bgr, byte> smallimg = new Image<Bgr, byte>(img.Width, img.Height, new Bgr(0, 0, 0));
+                Byte[, ,] sdata = smallimg.Data;
+                Form4 input = new Form4();
+                DialogResult dr = input.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    if (input.GetMode() == 1)
+                    {
+                        // toRBG
+                        Console.WriteLine("RGB");
+                    }else if (input.GetMode() == 2)
+                    {
+                        // toXYZ
+                        for (int i = 0; i < img.Height; i++)
+                        {
+                            for (int j = 0; j < img.Width; j++)
+                            {
+                                double r = data[i, j, 2];
+                                double g = data[i, j, 1];
+                                double b = data[i, j, 0];
+                                double x = 0.41 * r + 0.36 * g + 0.18 * b; // r2x
+                                if (x > 255)
+                                    x = 255;
+                                double y = 0.21 * r + 0.72 * g + 0.07 * b;// g2y
+                                if (y > 255)
+                                    y = 255;
+                                double z = 0.02 * r + 0.12 * g + 0.95 * b;// b2z
+                                if (z > 255)
+                                    z = 255;
+                                data[i, j, 2] = Convert.ToByte(x);
+                                data[i, j, 1] = Convert.ToByte(y);
+                                data[i, j, 0] = Convert.ToByte(z);
+                            }
+                        }
+                        Console.WriteLine("XYZ");
+                    }
+                    else if (input.GetMode() == 3)
+                    {
+                        // toCMY
+                        for (int i = 0; i < img.Height; i++)
+                            for (int j = 0; j < img.Width;j++ )
+                                for(int k=0; k < 3; k++)
+                                    data[i,j,k] = Convert.ToByte(255 -data[i,j,k]);
+                        Console.WriteLine("CMY");
+                    }
+                    else if (input.GetMode() == 4)
+                    {
+                        // toCMYK
+                        for (int i = 0; i < img.Height; i++)
+                        {
+                            for (int j = 0; j < img.Width; j++)
+                            {
+                                int[] bgr_bar = new int[3];
+                                for (int k = 0; k < 3; k++)
+                                    bgr_bar[k] = data[i, j, k];
+                                double[] bgr = new double[3];
+                                for (int k = 0; k < 3; k++)
+                                    bgr[k] = (double)bgr_bar[k] / 255.0;
+
+                                double big = bgr[0];
+                                for(int k=0;k<3;k++)
+                                    if(big < bgr[k])
+                                        big = bgr[k];
+                                double blacK = 1.0 - big;
+                                double[] cmy = new double[3];
+                                if (blacK == 1.0)
+                                {
+                                    for (int k = 0; k < 3; k++)
+                                        cmy[k] = 0.0;
+                                }
+                                else
+                                {
+                                    for (int k = 0; k < 3; k++)
+                                        cmy[k] = (1.0 - bgr[k] - blacK) / (1.0 - blacK);
+                                }
+
+                                for (int k = 0; k < 3;k++ )
+                                    data[i, j, k] = Convert.ToByte((int)((1.0-cmy[k]) * (1.0-blacK) *255.0));
+                            }
+                        }
+                        Console.WriteLine("CMYK");
+                    }
+                }
+                int u = 0, v = 0;
+                // upperleft --- Gray
+                for (int i = 0; i < img.Height; i+=2)
+                {
+                    for (int j = 0; j < img.Width; j+=2)
+                    {
+                        double r = data[i, j, 2];
+                        double g = data[i, j, 1];
+                        double b = data[i, j, 0];
+                        int val = (int)(r*0.299 + g*0.587 + b*0.114);
+                        if (val > 255)
+                            val = 255;
+                        else if(val < 0)
+                            val = 0;
+                        for (int k = 0; k < 3;k++ )
+                            sdata[u, v, k] = Convert.ToByte(val);
+                        v += 1;
+                    }
+                    u+=1;
+                    v = 0;
+                }
+                // upperright --- R
+                u = 0;
+                v = img.Width/2;
+                for (int i = 0; i < img.Height; i += 2)
+                {
+                    for (int j = 0; j < img.Width; j += 2)
+                    {
+                        double r = data[i, j, 2];
+                        if (r < 0)
+                            r = 0;
+                        else if (r > 255)
+                            r = 255;
+                        for (int k = 0; k < 3; k++)
+                            sdata[u, v, k] = Convert.ToByte(r);
+                        v += 1;
+                    }
+                    u += 1;
+                    v = img.Width/2;
+                }
+                // lowerleft --- G
+                u = img.Height / 2;
+                v = 0;
+                for (int i = 0; i < img.Height; i += 2)
+                {
+                    for (int j = 0; j < img.Width; j += 2)
+                    {
+                        double g = data[i, j, 1];
+                        if (g < 0)
+                            g = 0;
+                        else if (g > 255)
+                            g = 255;
+                        for (int k = 0; k < 3; k++)
+                            sdata[u, v, k] = Convert.ToByte(g);
+                        v += 1;
+                    }
+                    u += 1;
+                    v = 0;
+                }
+                // lowerright --- B
+                u = img.Height / 2;
+                v = img.Width / 2;
+                for (int i = 0; i < img.Height; i += 2)
+                {
+                    for (int j = 0; j < img.Width; j += 2)
+                    {
+                        double b = data[i, j, 0];
+                        if (b < 0)
+                            b = 0;
+                        else if (b > 255)
+                            b = 255;
+                        for (int k = 0; k < 3; k++)
+                            sdata[u, v, k] = Convert.ToByte(b);
+                        v += 1;
+                    }
+                    u += 1;
+                    v = img.Width/2;
+                }
+                pictureBox2.Image = smallimg.ToBitmap();
+                pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            else
+            {
+                MessageBox.Show("Please select an image to continue...");
+            }
+        }
     }
 }
