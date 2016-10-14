@@ -665,87 +665,87 @@ namespace Advanced_Image_Processing_40347905S
                         }
                         Console.WriteLine("CMYK");
                     }
-                }
-                int u = 0, v = 0;
-                // upperleft --- Gray
-                for (int i = 0; i < img.Height; i+=2)
-                {
-                    for (int j = 0; j < img.Width; j+=2)
+                    int u = 0, v = 0;
+                    // upperleft --- Gray
+                    for (int i = 0; i < img.Height; i += 2)
                     {
-                        double r = data[i, j, 2];
-                        double g = data[i, j, 1];
-                        double b = data[i, j, 0];
-                        int val = (int)(r*0.299 + g*0.587 + b*0.114);
-                        if (val > 255)
-                            val = 255;
-                        else if(val < 0)
-                            val = 0;
-                        for (int k = 0; k < 3;k++ )
-                            sdata[u, v, k] = Convert.ToByte(val);
-                        v += 1;
+                        for (int j = 0; j < img.Width; j += 2)
+                        {
+                            double r = data[i, j, 2];
+                            double g = data[i, j, 1];
+                            double b = data[i, j, 0];
+                            int val = (int)(r * 0.299 + g * 0.587 + b * 0.114);
+                            if (val > 255)
+                                val = 255;
+                            else if (val < 0)
+                                val = 0;
+                            for (int k = 0; k < 3; k++)
+                                sdata[u, v, k] = Convert.ToByte(val);
+                            v += 1;
+                        }
+                        u += 1;
+                        v = 0;
                     }
-                    u+=1;
+                    // upperright --- R
+                    u = 0;
+                    v = img.Width / 2;
+                    for (int i = 0; i < img.Height; i += 2)
+                    {
+                        for (int j = 0; j < img.Width; j += 2)
+                        {
+                            double r = data[i, j, 2];
+                            if (r < 0)
+                                r = 0;
+                            else if (r > 255)
+                                r = 255;
+                            for (int k = 0; k < 3; k++)
+                                sdata[u, v, k] = Convert.ToByte(r);
+                            v += 1;
+                        }
+                        u += 1;
+                        v = img.Width / 2;
+                    }
+                    // lowerleft --- G
+                    u = img.Height / 2;
                     v = 0;
-                }
-                // upperright --- R
-                u = 0;
-                v = img.Width/2;
-                for (int i = 0; i < img.Height; i += 2)
-                {
-                    for (int j = 0; j < img.Width; j += 2)
+                    for (int i = 0; i < img.Height; i += 2)
                     {
-                        double r = data[i, j, 2];
-                        if (r < 0)
-                            r = 0;
-                        else if (r > 255)
-                            r = 255;
-                        for (int k = 0; k < 3; k++)
-                            sdata[u, v, k] = Convert.ToByte(r);
-                        v += 1;
+                        for (int j = 0; j < img.Width; j += 2)
+                        {
+                            double g = data[i, j, 1];
+                            if (g < 0)
+                                g = 0;
+                            else if (g > 255)
+                                g = 255;
+                            for (int k = 0; k < 3; k++)
+                                sdata[u, v, k] = Convert.ToByte(g);
+                            v += 1;
+                        }
+                        u += 1;
+                        v = 0;
                     }
-                    u += 1;
-                    v = img.Width/2;
-                }
-                // lowerleft --- G
-                u = img.Height / 2;
-                v = 0;
-                for (int i = 0; i < img.Height; i += 2)
-                {
-                    for (int j = 0; j < img.Width; j += 2)
+                    // lowerright --- B
+                    u = img.Height / 2;
+                    v = img.Width / 2;
+                    for (int i = 0; i < img.Height; i += 2)
                     {
-                        double g = data[i, j, 1];
-                        if (g < 0)
-                            g = 0;
-                        else if (g > 255)
-                            g = 255;
-                        for (int k = 0; k < 3; k++)
-                            sdata[u, v, k] = Convert.ToByte(g);
-                        v += 1;
+                        for (int j = 0; j < img.Width; j += 2)
+                        {
+                            double b = data[i, j, 0];
+                            if (b < 0)
+                                b = 0;
+                            else if (b > 255)
+                                b = 255;
+                            for (int k = 0; k < 3; k++)
+                                sdata[u, v, k] = Convert.ToByte(b);
+                            v += 1;
+                        }
+                        u += 1;
+                        v = img.Width / 2;
                     }
-                    u += 1;
-                    v = 0;
+                    pictureBox2.Image = smallimg.ToBitmap();
+                    pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
                 }
-                // lowerright --- B
-                u = img.Height / 2;
-                v = img.Width / 2;
-                for (int i = 0; i < img.Height; i += 2)
-                {
-                    for (int j = 0; j < img.Width; j += 2)
-                    {
-                        double b = data[i, j, 0];
-                        if (b < 0)
-                            b = 0;
-                        else if (b > 255)
-                            b = 255;
-                        for (int k = 0; k < 3; k++)
-                            sdata[u, v, k] = Convert.ToByte(b);
-                        v += 1;
-                    }
-                    u += 1;
-                    v = img.Width/2;
-                }
-                pictureBox2.Image = smallimg.ToBitmap();
-                pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             }
             else
             {
