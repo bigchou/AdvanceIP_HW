@@ -752,5 +752,203 @@ namespace Advanced_Image_Processing_40347905S
                 MessageBox.Show("Please select an image to continue...");
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Image<Gray, float> image = new Image<Gray, float>(beforeBitmap);
+            //Matrix<float> complexImage = new Matrix<float>(image.Width, image.Height);
+            //image.CopyTo(complexImage);
+
+            //IntPtr complexImage = CvInvoke.cvCreateImage(image.Size, Emgu.CV.CvEnum.IplDepth.IplDepth32F, 2);
+            //UMat complexImage = new UMat(image.Size, Emgu.CV.CvEnum.DepthType.Cv32F, 2);
+            
+            //CvInvoke.cvSetImageCOI(complexImage, 1); // Select the channel to copy into
+            //CvInvoke.cvCopy(image.Ptr, complexImage, IntPtr.Zero);
+            //CvInvoke.cvSetImageCOI(complexImage, 0); // Select all channels
+
+
+
+
+
+
+
+            /*
+            int m = CvInvoke.GetOptimalDFTSize( image.Height );
+            int n = CvInvoke.GetOptimalDFTSize( image.Rows ); // on the border add zero values
+            Matrix<float> forwardDft = new Matrix<float>(m, n,2);
+            CvInvoke.cvSetImageCOI(forwardDft.Ptr, 1); // Select the channel to copy into
+            CvInvoke.cvCopy(image, forwardDft, IntPtr.Zero);
+            CvInvoke.cvSetImageCOI(forwardDft, 0); // Select all channels
+
+            //image.CopyTo(forwardDft[0].GetSubRect(new Rectangle(0, 0, image.Width, image.Height)));
+            CvInvoke.Dft(forwardDft, forwardDft, Emgu.CV.CvEnum.DxtType.Forward, image.Rows);
+            Matrix<float> forwardDftMagnitude = GetDftMagnitude(forwardDft);
+            SwitchQuadrants(ref forwardDftMagnitude);
+
+            pictureBox2.Image = Matrix2Bitmap(forwardDftMagnitude);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+            */
+
+
+
+
+
+
+
+            // Transform 1 channel grayscale image into 2 channel image
+            IntPtr complexImage = CvInvoke.cvCreateImage(image.Size, Emgu.CV.CvEnum.IPL_DEPTH.IPL_DEPTH_32F, 2);
+            CvInvoke.cvSetImageCOI(complexImage, 1); // Select the channel to copy into
+            CvInvoke.cvCopy(image, complexImage, IntPtr.Zero);
+            CvInvoke.cvSetImageCOI(complexImage, 0); // Select all channels
+            // This will hold the DFT data
+            Matrix<float> forwardDft = new Matrix<float>(image.Rows, image.Cols, 2);
+            CvInvoke.cvDFT(complexImage, forwardDft, Emgu.CV.CvEnum.CV_DXT.CV_DXT_FORWARD, 0);
+            CvInvoke.cvReleaseImage(ref complexImage);
+            // We'll display the magnitude
+            Matrix<float> forwardDftMagnitude = GetDftMagnitude(forwardDft);
+            SwitchQuadrants(ref forwardDftMagnitude);
+
+
+            pictureBox2.Image = Matrix2Bitmap(forwardDftMagnitude);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+
+
+            
+            /*
+            // This will hold the DFT data
+            Matrix<float> forwardDft = new Matrix<float>(image.Rows, image.Cols, 2);
+            //UMat forwardDft = new UMat(image.Size, Emgu.CV.CvEnum.DepthType.Cv32F, 2);
+            //CvInvoke.Dft(complexImage, forwardDft, Emgu.CV.CvEnum.DxtType.Forward,0);
+            CvInvoke.Dft(image, forwardDft, Emgu.CV.CvEnum.DxtType.Forward, 0);
+
+            // We'll display the magnitude
+            Matrix<float> forwardDftMagnitude = GetDftMagnitude(forwardDft);
+            SwitchQuadrants(ref forwardDftMagnitude);
+
+            pictureBox2.Image = Matrix2Bitmap(forwardDftMagnitude);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+            */
+            
+
+
+
+
+
+
+
+
+
+
+
+            //complexImage.SetTo(new MCvScalar(0, 0));
+            //CvInvoke.InsertChannel(image, complexImage, 0);
+            //UMat dft = new UMat();
+            //CvInvoke.Dft(complexImage, dft, Emgu.CV.CvEnum.DxtType.Forward, 0);
+            //UMat[] tmp = dft.Split();
+            //Console.WriteLine(tmp[0]);
+            //Image<Gray, Byte> result = new Image<Gray, Byte>(image.Rows, image.Cols);
+            //tmp[2].CopyTo(result);
+            //pictureBox2.Image = result.ToBitmap();
+            //pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+
+
+
+            /*
+            Image<Gray, float> image = new Image<Gray, float>(beforeBitmap);
+            IntPtr complexImage = CvInvoke.cvCreateImage(image.Size, Emgu.CV.CvEnum.IplDepth.IplDepth32F, 2);
+
+            UMat complex = new UMat();
+            CvInvoke.CvtColor(image, complex, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
+            for (int i = 0; i < image.Height; i++)
+                for (int j = 0; j < image.Width; j++)
+                {
+                    MCvScalar color = new MCvScalar(0, 0, 0);
+                    CvInvoke.cvSet2D(image, i, j, color); 
+                }
+            CvInvoke.cvSetImageCOI(complexImage, 1);
+            CvInvoke.cvCopy(image, complexImage, IntPtr.Zero);
+            CvInvoke.cvSetImageCOI(complexImage, 0);
+
+            Matrix<float> dft = new Matrix<float>(image.Rows, image.Cols, 2);
+            UMat ddft = new UMat();
+            CvInvoke.CvtColor(dft, ddft, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
+            CvInvoke.Dft(complex, ddft, Emgu.CV.CvEnum.DxtType.Forward, 0);
+
+
+            
+            //The Real part of the Fourier Transform
+            Matrix<float> outReal = new Matrix<float>(image.Size);
+            //The imaginary part of the Fourier Transform
+            Matrix<float> outIm = new Matrix<float>(image.Size);
+            CvInvoke.Split(ddft, outReal);
+
+            UMat tmp = outReal.ToUMat();
+            Image<Gray, float>  GreyFourierImage = new Image<Gray, float>(image.Rows, image.Cols);
+            tmp.CopyTo(GreyFourierImage);
+            pictureBox2.Image = GreyFourierImage.ToBitmap();
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;*/
+        }
+
+        private Bitmap Matrix2Bitmap(Matrix<float> matrix)
+        {
+            //CvInvoke.Normalize(matrix, matrix, 0.0, 255.0, Emgu.CV.CvEnum.NormType.MinMax);
+            CvInvoke.cvNormalize(matrix, matrix, 0.0, 255.0, Emgu.CV.CvEnum.NORM_TYPE.CV_MINMAX, IntPtr.Zero);
+            Image<Gray, float> image = new Image<Gray, float>(matrix.Size);
+            matrix.CopyTo(image);
+            return image.ToBitmap();
+        }
+
+        private Matrix<float> GetDftMagnitude(Matrix<float> fftData)
+        {
+            //Matrix<float>[] tmp = fftData.Split();
+            //The Real part of the Fourier Transform
+            Matrix<float> outReal = new Matrix<float>(fftData.Size);
+            //The imaginary part of the Fourier Transform
+            Matrix<float> outIm = new Matrix<float>(fftData.Size);
+            CvInvoke.cvSplit(fftData, outReal, outIm, IntPtr.Zero, IntPtr.Zero);
+
+            
+
+            CvInvoke.cvPow(outReal, outReal, 2.0);
+            //CvInvoke.Pow(tmp[1], 2.0, tmp[1]);
+            CvInvoke.cvPow(outIm, outIm, 2.0);
+            //CvInvoke.Pow(tmp[0], 2.0, tmp[0]);
+
+            CvInvoke.cvAdd(outReal, outIm, outReal, IntPtr.Zero);
+            //CvInvoke.Add(tmp[1], tmp[0], tmp[1]);
+            CvInvoke.cvPow(outReal, outReal, 0.5);
+            //CvInvoke.Pow(tmp[1], 0.5, tmp[1]);
+
+            CvInvoke.cvAddS(outReal, new MCvScalar(1.0), outReal, IntPtr.Zero); // 1 + Mag
+            //for (int i = 0; i < tmp[0].Size.Height; i++)
+            //    for (int j = 0; j < tmp[0].Size.Width; j++)
+            //        tmp[1].Data[i, j] += (float)1;
+            CvInvoke.cvLog(outReal, outReal); // log(1 + Mag)        
+            //CvInvoke.Log(tmp[1],tmp[1]);
+
+            return outReal;
+            //return tmp[1];
+        }
+
+        private void SwitchQuadrants(ref Matrix<float> matrix)
+        {
+            int cx = matrix.Cols / 2;
+            int cy = matrix.Rows / 2;
+
+            Matrix<float> q0 = matrix.GetSubRect(new Rectangle(0, 0, cx, cy));
+            Matrix<float> q1 = matrix.GetSubRect(new Rectangle(cx, 0, cx, cy));
+            Matrix<float> q2 = matrix.GetSubRect(new Rectangle(0, cy, cx, cy));
+            Matrix<float> q3 = matrix.GetSubRect(new Rectangle(cx, cy, cx, cy));
+            Matrix<float> tmp = new Matrix<float>(q0.Size);
+
+            q0.CopyTo(tmp);
+            q3.CopyTo(q0);
+            tmp.CopyTo(q3);
+            q1.CopyTo(tmp);
+            q2.CopyTo(q1);
+            tmp.CopyTo(q2);
+        }
     }
 }
