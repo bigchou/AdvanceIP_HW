@@ -1,107 +1,55 @@
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe.config
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.pdb
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csprojResolveAssemblyReference.cache
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form1.resources
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Properties.Resources.resources
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csproj.GenerateResource.Cache
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.exe
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.pdb
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\cvextern.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\msvcp120.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\msvcr120.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2013.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.GL.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\ZedGraph.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.GL.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\opencv_ffmpeg300.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Contrib.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Cuda.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.ML.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.OCR.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Shape.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Stitching.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Superres.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.VideoStab.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.Util.dll
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Contrib.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Cuda.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.ML.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.OCR.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Shape.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Stitching.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Superres.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.VideoStab.xml
-C:\Users\bigch\Desktop\AIP\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.Util.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe.config
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.exe
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.pdb
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\cvextern.dll
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\msvcp120.dll
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\msvcr120.dll
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\opencv_ffmpeg300.dll
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.pdb
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Contrib.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Cuda.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.ML.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.OCR.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Shape.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Stitching.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Superres.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.GL.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.VideoStab.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\bin\Debug\Emgu.Util.xml
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csprojResolveAssemblyReference.cache
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form1.resources
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Properties.Resources.resources
-C:\Users\bigch\Desktop\AIP\aip\Advanced Image Processing 40347905S\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csproj.GenerateResource.Cache
-D:\test\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe.config
-D:\test\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.exe
-D:\test\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.pdb
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe.config
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.exe
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.pdb
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\cvextern.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\msvcp120.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\msvcr120.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_ffmpeg300.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.exe
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Advanced Image Processing 40347905S.pdb
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Contrib.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Cuda.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\HW4_Advanced_Image_Processing_40347905S.exe.config
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\HW4_Advanced_Image_Processing_40347905S.exe.manifest
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\HW4_Advanced_Image_Processing_40347905S.application
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\HW4_Advanced_Image_Processing_40347905S.exe
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\HW4_Advanced_Image_Processing_40347905S.pdb
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.DebuggerVisualizers.VS2013.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.GPU.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.ML.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.OCR.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Shape.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.OpenCL.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Stitching.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Superres.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.dll
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.GL.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.VideoStab.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.Util.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\ZedGraph.dll
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.xml
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Contrib.xml
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Cuda.xml
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.GPU.xml
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.ML.xml
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.OCR.xml
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Shape.xml
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.OpenCL.xml
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Stitching.xml
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.Superres.xml
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.xml
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.UI.GL.xml
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.CV.VideoStab.xml
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\Emgu.Util.xml
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csprojResolveAssemblyReference.cache
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form1.resources
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form2.resources
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form3.resources
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Form4.resources
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced_Image_Processing_40347905S.Properties.Resources.resources
 C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\Advanced Image Processing 40347905S.csproj.GenerateResource.Cache
-C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\HW1.exe.config
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\HW4_Advanced_Image_Processing_40347905S.exe.manifest
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\HW4_Advanced_Image_Processing_40347905S.application
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\HW4_Advanced_Image_Processing_40347905S.exe
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\obj\Debug\HW4_Advanced_Image_Processing_40347905S.pdb
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\cvextern.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\OpenCL.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_calib3d2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_contrib2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_core2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_features2d2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_flann2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_gpu2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_highgui2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_imgproc2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_legacy2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_ml2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_nonfree2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_objdetect2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_photo2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_stitching2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_superres2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_video2410.dll
+C:\Users\bigch\Desktop\AdvanceIP_HW\Advanced Image Processing 40347905S\bin\Debug\opencv_videostab2410.dll

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Advanced_Image_Processing_40347905S</RootNamespace>
-    <AssemblyName>HW3_Advanced_Image_Processing_40347905S</AssemblyName>
+    <AssemblyName>HW4_Advanced_Image_Processing_40347905S</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -23,8 +23,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ProductName>HW3_Advanced_Image_Processing_40347905S</ProductName>
-    <SuiteName>HW3_Advanced_Image_Processing_40347905S</SuiteName>
+    <ProductName>HW4_Advanced_Image_Processing_40347905S</ProductName>
+    <SuiteName>HW4_Advanced_Image_Processing_40347905S</SuiteName>
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -55,24 +55,6 @@
   <PropertyGroup>
     <ApplicationIcon>ineffable_ERJ_icon.ico</ApplicationIcon>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>6CD7783E45122814D201C0DFB7C33F93F37BA946</ManifestCertificateThumbprint>
   </PropertyGroup>
@@ -85,44 +67,56 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Emgu.CV, Version=3.0.0.2157, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.CV, Version=2.4.10.1939, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.dll</HintPath>
+      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2013, Version=3.0.0.2154, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.CV.ML, Version=2.4.10.1939, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.DebuggerVisualizers.VS2013.dll</HintPath>
+      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.ML.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.GPU">
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.GPU.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.ML, Version=3.0.0.2157, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.CV.OCR, Version=2.4.10.1939, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.ML.dll</HintPath>
+      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.OCR.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.OCR, Version=3.0.0.2157, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.CV.Stitching, Version=2.4.10.1939, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.OCR.dll</HintPath>
+      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.Stitching.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.OpenCL">
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.OpenCL.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.Stitching, Version=3.0.0.2157, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.CV.UI, Version=2.4.10.1939, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.Stitching.dll</HintPath>
+      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.UI, Version=3.0.0.2157, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+    <Reference Include="Emgu.Util, Version=2.4.10.1939, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.VideoStab, Version=3.0.0.2157, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.CV.VideoStab.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.Util, Version=3.0.0.2157, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\Emgu.Util.dll</HintPath>
+      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -136,7 +130,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-universal 2.4.10.1940\bin\ZedGraph.dll</HintPath>
+      <HintPath>..\..\..\..\..\Emgu\emgucv-windows-x86 2.4.0.1717\bin\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -203,62 +197,74 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="cublas32_42_9.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cudart32_42_9.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="cufft32_42_9.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="cvextern_gpu.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ineffable_ERJ_icon.ico" />
-    <Content Include="OpenCL.dll">
+    <Content Include="npp32_42_9.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_calib3d2410.dll">
+    <Content Include="opencv_calib3d240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_contrib2410.dll">
+    <Content Include="opencv_contrib240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_core2410.dll">
+    <Content Include="opencv_core240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_features2d2410.dll">
+    <Content Include="opencv_features2d240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_flann2410.dll">
+    <Content Include="opencv_ffmpeg240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_gpu2410.dll">
+    <Content Include="opencv_flann240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_highgui2410.dll">
+    <Content Include="opencv_gpu240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_imgproc2410.dll">
+    <Content Include="opencv_highgui240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_legacy2410.dll">
+    <Content Include="opencv_imgproc240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_ml2410.dll">
+    <Content Include="opencv_legacy240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_nonfree2410.dll">
+    <Content Include="opencv_ml240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_objdetect2410.dll">
+    <Content Include="opencv_nonfree240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_photo2410.dll">
+    <Content Include="opencv_objdetect240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_stitching2410.dll">
+    <Content Include="opencv_photo240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_superres2410.dll">
+    <Content Include="opencv_stitching240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_video2410.dll">
+    <Content Include="opencv_video240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="opencv_videostab2410.dll">
+    <Content Include="opencv_videostab240.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

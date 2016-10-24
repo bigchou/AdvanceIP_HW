@@ -51,12 +51,10 @@
             Gaussian motion filter
             </summary>
         </member>
-        <member name="M:Emgu.CV.VideoStab.GaussianMotionFilter.#ctor(System.Int32,System.Single)">
+        <member name="M:Emgu.CV.VideoStab.GaussianMotionFilter.#ctor">
             <summary>
             Create a Gaussian motion filter
             </summary>
-            <param name="radius">The radius, use 15 for default.</param>
-            <param name="stdev">The standard deviation, use -1.0f for default</param>
         </member>
         <member name="M:Emgu.CV.VideoStab.GaussianMotionFilter.DisposeObject">
             <summary>

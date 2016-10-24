@@ -9,269 +9,89 @@
             Neural network
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.IStatModel">
+        <member name="T:Emgu.CV.ML.StatModel">
             <summary>
-            Interface for statistical models in OpenCV ML.
+            A statistic model
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.IStatModel.StatModelPtr">
+        <member name="M:Emgu.CV.ML.StatModel.Save(System.String)">
             <summary>
-            Return the pointer to the StatModel object
+            Save the statistic model to file
             </summary>
-            <returns>The pointer to the StatModel object</returns>
+            <param name="fileName">The file name where this StatModel will be saved</param>
         </member>
-        <member name="M:Emgu.CV.ML.ANN_MLP.#ctor">
+        <member name="M:Emgu.CV.ML.StatModel.Load(System.String)">
+            <summary>
+            Load the statistic model from file
+            </summary>
+            <param name="fileName">The file to load the model from</param>
+        </member>
+        <member name="M:Emgu.CV.ML.StatModel.Clear">
+            <summary>
+            Clear the statistic model
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.ANN_MLP.#ctor(Emgu.CV.Matrix{System.Int32},Emgu.CV.ML.MlEnum.ANN_MLP_ACTIVATION_FUNCTION,System.Double,System.Double)">
             <summary>
             Create a neural network using the specific parameters
             </summary>
+            <param name="layerSize">The size of the layer</param>
+            <param name="activeFunction">Activation function</param>
+            <param name="fParam1">Free parameters of the activation function, alpha</param>
+            <param name="fParam2">Free parameters of the activation function, beta</param>
         </member>
         <member name="M:Emgu.CV.ML.ANN_MLP.DisposeObject">
             <summary>
             Release the memory associated with this neural network
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.ANN_MLP.SetLayerSizes(Emgu.CV.IInputArray)">
+        <member name="M:Emgu.CV.ML.ANN_MLP.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams,Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG)">
             <summary>
-            Sets the layer sizes.
+            Train the ANN_MLP model with the specific paramters
             </summary>
-            <param name="layerSizes">Integer vector specifying the number of neurons in each layer including the input and output layers. The very first element specifies the number of elements in the input layer. The last element - number of elements in the output layer.</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleWeights">It is not null only for RPROP. The optional floating-point vector of weights for each sample. Some samples may be more important than others for training, e.g. user may want to gain the weight of certain classes to find the right balance between hit-rate and false-alarm rate etc</param>
+            <param name="sampleMask">Can be null if not needed. When specified, it is a mask identifies samples of interest. It must be a Matrix&gt;Byte&lt; of nx1, where n is the number of rows in <paramref name="trainData"/></param>
+            <param name="parameters">The parameters for ANN_MLP</param>
+            <param name="flag">The traning flag</param>
+            <returns>The number of done iterations</returns>
         </member>
-        <member name="M:Emgu.CV.ML.ANN_MLP.SetActivationFunction(Emgu.CV.ML.ANN_MLP.AnnMlpActivationFunction,System.Double,System.Double)">
+        <member name="M:Emgu.CV.ML.ANN_MLP.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Int32},Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams,Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG)">
             <summary>
-            Initialize the activation function for each neuron.
+            Train the ANN_MLP model with the specific paramters
             </summary>
-            <param name="function">Currently the default and the only fully supported activation function is SigmoidSym </param>
-            <param name="param1">The first parameter of the activation function.</param>
-            <param name="param2">The second parameter of the activation function.</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleWeights">It is not null only for RPROP. The optional floating-point vector of weights for each sample. Some samples may be more important than others for training, e.g. user may want to gain the weight of certain classes to find the right balance between hit-rate and false-alarm rate etc</param>
+            <param name="sampleIdx">Can be null if not needed. When specified, the elements in the matrix contains the index to the samples of interest. It is a Matrix&gt;int&lt; of nx1 where n %lt;= number of rows in <paramref name="trainData"/></param>
+            <param name="parameters">The parameters for ANN_MLP</param>
+            <param name="flag">The traning flag</param>
+            <returns>The number of done iterations</returns>
         </member>
-        <member name="M:Emgu.CV.ML.ANN_MLP.SetTrainMethod(Emgu.CV.ML.ANN_MLP.AnnMlpTrainMethod,System.Double,System.Double)">
+        <member name="M:Emgu.CV.ML.ANN_MLP.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams,Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG)">
             <summary>
-            Sets training method and common parameters.
+            Train the ANN_MLP model with the specific paramters
             </summary>
-            <param name="method">The training method.</param>
-            <param name="param1">The param1.</param>
-            <param name="param2">The param2.</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleWeights">It is not null only for RPROP. The optional floating-point vector of weights for each sample. Some samples may be more important than others for training, e.g. user may want to gain the weight of certain classes to find the right balance between hit-rate and false-alarm rate etc</param>
+            <param name="parameters">The parameters for ANN_MLP</param>
+            <param name="flag">The traning flag</param>
+            <returns>The number of done iterations</returns>
         </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.TermCriteria">
+        <member name="M:Emgu.CV.ML.ANN_MLP.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single})">
             <summary>
-            Termination criteria of the training algorithm
+            Predit the response of the <paramref name="samples"/>
             </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.BackpropWeightScale">
-            <summary>
-            BPROP: Strength of the weight gradient term
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.BackpropMomentumScale">
-            <summary>
-            BPROP: Strength of the momentum term (the difference between weights on the 2 previous iterations)
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.RpropDW0">
-            <summary>
-            RPROP: Initial value Delta_0 of update-values Delta_{ij}
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.RpropDWPlus">
-            <summary>
-            RPROP: Increase factor
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.RpropDWMinus">
-            <summary>
-            RPROP: Decrease factor
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.RpropDWMin">
-            <summary>
-            RPROP: Update-values lower limit
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.ANN_MLP.RpropDWMax">
-            <summary>
-            RPROP: Update-values upper limit
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.ANN_MLP.AnnMlpActivationFunction">
-            <summary>
-            Possible activation functions
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.ANN_MLP.AnnMlpActivationFunction.Identity">
-            <summary>
-            Identity
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.ANN_MLP.AnnMlpActivationFunction.SigmoidSym">
-            <summary>
-            sigmoid symmetric
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.ANN_MLP.AnnMlpActivationFunction.Gaussian">
-            <summary>
-            Gaussian
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.ANN_MLP.AnnMlpTrainMethod">
-            <summary>
-            Training method for ANN_MLP
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.ANN_MLP.AnnMlpTrainMethod.Backprop">
-            <summary>
-            Back-propagation algorithm
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.ANN_MLP.AnnMlpTrainMethod.Rprop">
-            <summary>
-            Batch RPROP algorithm
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.MlInvoke">
-            <summary>
-            This class contains functions to call into machine learning library
-            </summary>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.cveANN_MLPRelease(System.IntPtr@)">
-            <summary>
-            Release the ANN_MLP model
-            </summary>
-            <param name="model">The ANN_MLP model to be released</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.StatModelSave(System.IntPtr,System.IntPtr)">
-            <summary>
-            Save the statistic model to the specific file
-            </summary>
-            <param name="statModel">The statistic model to save</param>
-            <param name="fileName">The file name to save to</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.StatModelClear(System.IntPtr)">
-            <summary>
-            Clear the statistic model
-            </summary>
-            <param name="statModel">The model to be cleared</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvNormalBayesClassifierDefaultCreate(System.IntPtr@,System.IntPtr@)">
-            <summary>
-            Create a normal bayes classifier
-            </summary>
-            <returns>The normal bayes classifier</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvNormalBayesClassifierRelease(System.IntPtr@)">
-            <summary>
-            Release the memory associated with the bayes classifier
-            </summary>
-            <param name="classifier">The classifier to release</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvKNearestCreate(System.IntPtr@,System.IntPtr@)">
-            <summary>
-            Create a KNearest classifier
-            </summary>
-            <returns>The KNearest classifier</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvKNearestRelease(System.IntPtr@)">
-            <summary>
-            Release the KNearest classifier
-            </summary>
-            <param name="knearest">The classifier to release</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvEMDefaultCreate(System.IntPtr@,System.IntPtr@)">
-            <summary>
-            Create a default EM model
-            </summary>
-            <returns>Pointer to the EM model</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvEMRelease(System.IntPtr@)">
-            <summary>
-            Release the EM model
-            </summary>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvEMPredict(System.IntPtr,System.IntPtr,Emgu.CV.Structure.MCvPoint2D64f@,System.IntPtr)">
-            <summary>
-            Given the EM <paramref name="model"/>, predict the probability of the <paramref name="samples"/>
-            </summary>
-            <param name="model">The EM model</param>
             <param name="samples">The input samples</param>
-            <param name="probs">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
-            <param name="result">The result.</param>
+            <param name="outputs">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
+            <returns>In case of classification the method returns the class label, in case of regression - the output function value</returns>
         </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMDefaultCreate(System.IntPtr@,System.IntPtr@)">
+        <member name="P:Emgu.CV.ML.ANN_MLP.LayerCount">
             <summary>
-            Create a default SVM model
+            Get the number of layer in the neural network.
             </summary>
-            <returns>Pointer to the SVM model</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMRelease(System.IntPtr@)">
-            <summary>
-            Release the SVM model and all the memory associated to ir
-            </summary>
-            <param name="model">The SVM model to be released</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMGetDefaultGrid(Emgu.CV.ML.SVM.ParamType,Emgu.CV.ML.Structure.MCvParamGrid@)">
-            <summary>
-            Get the default parameter grid for the specific SVM type
-            </summary>
-            <param name="type">The SVM type</param>
-            <param name="grid">The parameter grid reference, values will be filled in by the function call</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMTrainAuto(System.IntPtr,System.IntPtr,System.Int32,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,System.Boolean)">
-            <summary>
-            The method trains the SVM model automatically by choosing the optimal parameters C, gamma, p, nu, coef0, degree from CvSVMParams. By the optimality one mean that the cross-validation estimate of the test set error is minimal. 
-            </summary>
-            <param name="model">The SVM model</param>
-            <param name="trainData">The training data.</param>
-            <param name="kFold">Cross-validation parameter. The training set is divided into k_fold subsets, one subset being used to train the model, the others forming the test set. So, the SVM algorithm is executed k_fold times</param>
-            <param name="cGrid">cGrid</param>
-            <param name="gammaGrid">gammaGrid</param>
-            <param name="pGrid">pGrid</param>
-            <param name="nuGrid">nuGrid</param>
-            <param name="coefGrid">coedGrid</param>
-            <param name="degreeGrid">degreeGrid</param>
-            <param name="balanced">If true and the problem is 2-class classification then the method creates more balanced cross-validation subsets that is proportions between classes in subsets are close to such proportion in the whole train dataset.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMGetSupportVectors(System.IntPtr,System.IntPtr)">
-            <summary>
-            The method retrieves a given support vector
-            </summary>
-            <param name="model">The SVM model</param>
-            <param name="supportVectors">The output support vectors</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.cveDTreesCreate(System.IntPtr@,System.IntPtr@)">
-            <summary>
-            Create a default decision tree
-            </summary>
-            <returns>Pointer to the decision tree</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.cveDTreesRelease(System.IntPtr@)">
-            <summary>
-            Release the decision tree model
-            </summary>
-            <param name="model">The decision tree model to be released</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.cveRTreesCreate(System.IntPtr@,System.IntPtr@)">
-            <summary>
-            Create a default random tree
-            </summary>
-            <returns>Pointer to the random tree</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.cveRTreesRelease(System.IntPtr@)">
-            <summary>
-            Release the random tree model
-            </summary>
-            <param name="model">The random tree model to be released</param>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.cveBoostCreate(System.IntPtr@,System.IntPtr@)">
-            <summary>
-            Create a default boost classifier
-            </summary>
-            <returns>Pointer to the boost classifier</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.MlInvoke.cveBoostRelease(System.IntPtr@)">
-            <summary>
-            Release the boost classifier
-            </summary>
-            <param name="model">The boost classifier to be released</param>
         </member>
         <member name="T:Emgu.CV.ML.Boost">
             <summary>
@@ -283,89 +103,127 @@
             Create a default Boost classifier
             </summary>
         </member>
+        <member name="M:Emgu.CV.ML.Boost.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvBoostParams,System.Boolean)">
+            <summary>
+            Train the boost tree using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varIdx">Can be null if not needed. When specified, the elements in the matrix contains the index to the variables (features) of interest. It is a Matrix&gt;int&lt; of nx1 where n %lt;= number of rows in <paramref name="trainData"/></param>
+            <param name="sampleIdx">Can be null if not needed. When specified, the elements in the matrix contains the index to the samples of interest. It is a Matrix&gt;int&lt; of nx1 where n %lt;= number of rows in <paramref name="trainData"/></param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the boost tree</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.Boost.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvBoostParams,System.Boolean)">
+            <summary>
+            Train the boost tree using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varMask">Can be null if not needed. When specified, it is a mask that identifies variables (features) of interest. It must be a Matrix&gt;Byte&lt; of n x 1 where n is the number of rows in <paramref name="trainData"/></param>
+            <param name="sampleMask">Can be null if not needed. When specified, it is a mask identifies samples of interest. It must be a Matrix&gt;Byte&lt; of nx1, where n is the number of rows in <paramref name="trainData"/></param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the boost tree</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.Boost.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvBoostParams,System.Boolean)">
+            <summary>
+            Train the boost tree using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the boost tree</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.Boost.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Single},Emgu.CV.Structure.MCvSlice,System.Boolean)">
+            <summary>
+            The method takes the feature vector and the optional missing measurement mask on input, traverses the random tree and returns the cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)
+            </summary>
+            <param name="sample">The sample to be predicted</param>
+            <param name="missingDataMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <i>trainData</i>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="weakResponses">Can be null if not needed. a floating-point vector, of responses from each individual weak classifier. The number of elements in the vector must be equal to the slice length.</param>
+            <param name="slice">The continuous subset of the sequence of weak classifiers to be used for prediction</param>
+            <param name="rawMode">Normally set to false that implies a regular input. If it is true, the method assumes that all the values of the discrete input variables have been already normalized to 0..num_of_categoriesi-1 ranges. (as the decision tree uses such normalized representation internally). It is useful for faster prediction with tree ensembles. For ordered input variables the flag is not used. </param>    
+            <returns>The cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)</returns>
+        </member>
         <member name="M:Emgu.CV.ML.Boost.DisposeObject">
             <summary>
             Release the Boost classifier and all memory associate with it
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.Boost.Type">
+        <member name="T:Emgu.CV.ML.DTree">
             <summary>
-            Boost Type
+            Decision Tree 
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.Boost.Type.Discrete">
-            <summary>
-            Discrete AdaBoost.
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.Boost.Type.Real">
-            <summary>
-            Real AdaBoost. It is a technique that utilizes confidence-rated predictions and works well with categorical data.
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.Boost.Type.Logit">
-            <summary>
-            LogitBoost. It can produce good regression fits.
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.Boost.Type.Gentle">
-            <summary>
-            Gentle AdaBoost. It puts less weight on outlier data points and for that reason is often good with regression data.
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.DTrees">
-            <summary>
-            Decision Trees 
-            </summary>
-        </member>
-        <member name="M:Emgu.CV.ML.DTrees.#ctor">
+        <member name="M:Emgu.CV.ML.DTree.#ctor">
             <summary>
             Create a default decision tree
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.DTrees.DisposeObject">
+        <member name="M:Emgu.CV.ML.DTree.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvDTreeParams)">
+            <summary>
+            Train the decision tree using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varIdx">Can be null if not needed. When specified, the elements in the matrix contains the index to the variables (features) of interest. It is a Matrix&gt;int&lt; of nx1 where n %lt;= number of rows in <paramref name="trainData"/></param>
+            <param name="sampleIdx">Can be null if not needed. When specified, the elements in the matrix contains the index to the samples of interest. It is a Matrix&gt;int&lt; of nx1 where n %lt;= number of rows in <paramref name="trainData"/></param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the decision tree</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.DTree.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvDTreeParams)">
+            <summary>
+            Train the decision tree using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varMask">Can be null if not needed. When specified, it is a mask that identifies variables (features) of interest. It must be a Matrix&gt;Byte&lt; of n x 1 where n is the number of rows in <paramref name="trainData"/></param>
+            <param name="sampleMask">Can be null if not needed. When specified, it is a mask identifies samples of interest. It must be a Matrix&gt;Byte&lt; of nx1, where n is the number of rows in <paramref name="trainData"/></param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the decision tree</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.DTree.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvDTreeParams)">
+            <summary>
+            Train the decision tree using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the decision tree</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.DTree.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},System.Boolean)">
+            <summary>
+            The method takes the feature vector and the optional missing measurement mask on input, traverses the decision tree and returns the reached leaf node on output. The prediction result, either the class label or the estimated function value, may be retrieved as value field of the CvDTreeNode structure
+            </summary>
+            <param name="sample">The sample to be predicted</param>
+            <param name="missingDataMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <i>trainData</i>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="rawMode">normally set to false that implies a regular input. If it is true, the method assumes that all the values of the discrete input variables have been already normalized to 0..num_of_categoriesi-1 ranges. (as the decision tree uses such normalized representation internally). It is useful for faster prediction with tree ensembles. For ordered input variables the flag is not used. </param>
+            <returns>Pointer to the reached leaf node on output. The prediction result, either the class label or the estimated function value, may be retrieved as value field of the CvDTreeNode structure</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.DTree.DisposeObject">
             <summary>
             Release the decision tree and all the memory associate with it
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.MaxCategories">
-            <summary>
-            Cluster possible values of a categorical variable into K less than or equals maxCategories clusters to find a suboptimal split
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.MaxDepth">
-            <summary>
-            The maximum possible depth of the tree
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.MinSampleCount">
-            <summary>
-            If the number of samples in a node is less than this parameter then the node will not be split
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.CVFolds">
-            <summary>
-            If CVFolds greater than 1 then algorithms prunes the built decision tree using K-fold
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.UseSurrogates">
-            <summary>
-            If true then surrogate splits will be built
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.Use1SERule">
-            <summary>
-            If true then a pruning will be harsher
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.TruncatePrunedTree">
-            <summary>
-            If true then pruned branches are physically removed from the tree
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.DTrees.RegressionAccuracy">
-            <summary>
-            Termination criteria for regression trees
             </summary>
         </member>
         <member name="T:Emgu.CV.ML.EM">
@@ -373,86 +231,294 @@
             Expectation Maximization model
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.EM.#ctor">
+        <member name="M:Emgu.CV.ML.EM.#ctor(System.Int32,Emgu.CV.ML.MlEnum.EM_COVARIAN_MATRIX_TYPE,Emgu.CV.Structure.MCvTermCriteria)">
             <summary>
             Create an Expectation Maximization model
             </summary>
+            <param name="nclusters">The number of mixture components in the Gaussian mixture model. Use 5 for default.</param>
+            <param name="covMatType">Constraint on covariance matrices which defines type of matrices</param>
+            <param name="termcrit">The termination criteria of the EM algorithm. The EM algorithm can be terminated by the number of iterations termCrit.maxCount (number of M-steps) or when relative change of likelihood logarithm is less than termCrit.epsilon. Default maximum number of iterations is 100</param>
         </member>
-        <member name="M:Emgu.CV.ML.EM.trainE(Emgu.CV.IInputArray,Emgu.CV.IInputArray,Emgu.CV.IInputArray,Emgu.CV.IInputArray,Emgu.CV.IOutputArray,Emgu.CV.IOutputArray,Emgu.CV.IOutputArray)">
+        <member name="M:Emgu.CV.ML.EM.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Double})">
             <summary>
-            Estimate the Gaussian mixture parameters from a samples set. This variation starts with Expectation step. You need to provide initial means of mixture components. Optionally you can pass initial weights and covariance matrices of mixture components.
+            Starts with Expectation step. Initial values of the model parameters will be estimated by the k-means algorithm.
             </summary>
-            <param name="samples">Samples from which the Gaussian mixture model will be estimated. It should be a one-channel matrix, each row of which is a sample. If the matrix does not have CV_64F type it will be converted to the inner matrix of such type for the further computing.</param>
-            <param name="means0">Initial means of mixture components. It is a one-channel matrix of nclusters x dims size. If the matrix does not have CV_64F type it will be converted to the inner matrix of such type for the further computing.</param>
-            <param name="covs0">The vector of initial covariance matrices of mixture components. Each of covariance matrices is a one-channel matrix of dims x dims size. If the matrices do not have CV_64F type they will be converted to the inner matrices of such type for the further computing.</param>
-            <param name="weights0">Initial weights of mixture components. It should be a one-channel floating-point matrix with 1 x nclusters or nclusters x 1 size.</param>
-            <param name="loglikelihoods">The optional output matrix that contains a likelihood logarithm value for each sample. It has nsamples x 1 size and CV_64FC1 type.</param>
-            <param name="labels">The optional output "class label" (indices of the most probable mixture component for each sample). It has nsamples x 1 size and CV_32SC1 type.</param>
-            <param name="probs">The optional output matrix that contains posterior probabilities of each Gaussian mixture component given the each sample. It has nsamples x nclusters size and CV_64FC1 type.</param>
+            <param name="samples">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="labels">Can be null if not needed. Optionally computed output "class label" for each sample</param>
+            <param name="logLikelihoods">Can be null if not needed. The optional output matrix that contains a likelihood logarithm value for each sample. It has nsamples x 1 size and CV_64FC1 type.</param>
+            <param name="probs">Can be null if not needed. Initial probabilities p_{i,k} of sample i to belong to mixture component k. It is a one-channel floating-point matrix of nsamples x nclusters size.</param>
+            <returns>The methods return true if the Gaussian mixture model was trained successfully, otherwise it returns false.</returns>
         </member>
-        <member name="M:Emgu.CV.ML.EM.TrainM(Emgu.CV.IInputArray,Emgu.CV.IInputArray,Emgu.CV.IOutputArray,Emgu.CV.IOutputArray,Emgu.CV.IOutputArray)">
+        <member name="M:Emgu.CV.ML.EM.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},System.Double@)">
             <summary>
-            Estimate the Gaussian mixture parameters from a samples set.
-            This variation starts with Expectation step. Initial values of the model parameters will be estimated by the k-means algorithm.
-            Unlike many of the ML models, EM is an unsupervised learning algorithm and it does not take responses (class labels or function values) as input. Instead, it computes the Maximum Likelihood Estimate of the Gaussian mixture parameters from an input sample set, stores all the parameters inside the structure, and optionally computes the output "class label" for each sample.
-            The trained model can be used further for prediction, just like any other classifier.
-            </summary>
-            <param name="samples">Samples from which the Gaussian mixture model will be estimated. It should be a one-channel matrix, each row of which is a sample. If the matrix does not have CV_64F type it will be converted to the inner matrix of such type for the further computing.</param>
-            <param name="probs0">The probs0.</param>
-            <param name="logLikelihoods">The optional output matrix that contains a likelihood logarithm value for each sample. It has nsamples x 1 size and CV_64FC1 type.</param>
-            <param name="labels">The optional output "class label" for each sample(indices of the most probable mixture component for each sample). It has nsamples x 1 size and CV_32SC1 type.</param>
-            <param name="probs">The optional output matrix that contains posterior probabilities of each Gaussian mixture component given the each sample. It has nsamples x nclusters size and CV_64FC1 type.</param>
-        </member>
-        <member name="M:Emgu.CV.ML.EM.Predict(Emgu.CV.IInputArray,Emgu.CV.IOutputArray)">
-            <summary>
-            Predict the probability of the <paramref name="samples"/>
+            Predit the probability of the <paramref name="samples"/>
             </summary>
             <param name="samples">The input samples</param>
             <param name="probs">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
+            <param name="likelihood">The likelihood logarithm value</param>
+            <returns>an index of the most probable mixture component for the given sample.</returns>
         </member>
         <member name="M:Emgu.CV.ML.EM.DisposeObject">
             <summary>
             Release the memory associated with this EM model
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.EM.ClustersNumber">
+        <member name="T:Emgu.CV.ML.EMLegacy">
             <summary>
-            The number of mixtures
+            Expectation Maximization model
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.EM.CovarianceMatrixType">
+        <member name="M:Emgu.CV.ML.EMLegacy.#ctor">
             <summary>
-            The type of the mixture covariation matrices
+            Create an Expectation Maximization model
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.EM.TermCriteria">
+        <member name="M:Emgu.CV.ML.EMLegacy.#ctor(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.EMParams,Emgu.CV.Matrix{System.Int32})">
             <summary>
-            Termination criteria of the procedure. EM algorithm stops either after a certain number of iterations (term_crit.num_iter), or when the parameters change too little (no more than term_crit.epsilon) from iteration to iteration
+            Creaet an Expectation Maximization model using the specific training parameters
+            </summary>
+            <param name="samples">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="parameters">The parameters for EM</param>
+            <param name="labels">Can be null if not needed. Optionally computed output "class label" for each sample</param>
+        </member>
+        <member name="M:Emgu.CV.ML.EMLegacy.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.EMParams,Emgu.CV.Matrix{System.Int32})">
+            <summary>
+            Train the EM model using the specific training data
+            </summary>
+            <param name="samples">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="parameters">The parameters for EM</param>
+            <param name="labels">Can be null if not needed. Optionally computed output "class label" for each sample</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.EMLegacy.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single})">
+            <summary>
+            Predit the probability of the <paramref name="samples"/>
+            </summary>
+            <param name="samples">The input samples</param>
+            <param name="probs">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
+            <returns>In case of classification the method returns the class label, in case of regression - the output function value</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.EMLegacy.GetCovariances">
+            <summary>
+            Get the covariance matrices for each cluster
+            </summary>
+            <returns>Get the array of covariance matrix for each data point.</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.EMLegacy.DisposeObject">
+            <summary>
+            Release the memory associated with this EM model
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.EM.CovarianMatrixType">
+        <member name="P:Emgu.CV.ML.EMLegacy.NumberOfClusters">
             <summary>
-            The type of the mixture covariation matrices
+            Get the number of clusters of this EM model
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.EM.CovarianMatrixType.Spherical">
+        <member name="P:Emgu.CV.ML.EMLegacy.Means">
             <summary>
-            A covariation matrix of each mixture is a scaled identity matrix, ?k*I, so the only parameter to be estimated is ?k. The option may be used in special cases, when the constraint is relevant, or as a first step in the optimization (e.g. in case when the data is preprocessed with PCA). The results of such preliminary estimation may be passed again to the optimization procedure, this time with cov_mat_type=COV_MAT_DIAGONAL
+            Get the mean of the clusters
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.EM.CovarianMatrixType.Diagonal">
+        <member name="P:Emgu.CV.ML.EMLegacy.Weights">
             <summary>
-            A covariation matrix of each mixture may be arbitrary diagonal matrix with positive diagonal elements, that is, non-diagonal elements are forced to be 0's, so the number of free parameters is d  for each matrix. This is most commonly used option yielding good estimation results
+            Get the weights of the clusters
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.EM.CovarianMatrixType.Generic">
+        <member name="P:Emgu.CV.ML.EMLegacy.Probabilities">
             <summary>
-            A covariation matrix of each mixture may be arbitrary symmetrical positively defined matrix, so the number of free parameters in each matrix is about d2/2. It is not recommended to use this option, unless there is pretty accurate initial estimation of the parameters and/or a huge number of training samples
+            Get the matrix of probability. 
+            A entry on the m_th row and n_th col indicates the probability of the m_th data point given the n_th cluster.
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.EM.CovarianMatrixType.Default">
+        <member name="T:Emgu.CV.ML.EMParams">
             <summary>
-            The default
+            The parameters for the EM model
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.EMParams.#ctor">
+            <summary>
+            Create EM parameters with default value
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.CovMatType">
+            <summary>
+            Get or set the type of Covariance matrix
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.Covs">
+            <summary>
+            Get or Set the Covariance matrices
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.Means">
+            <summary>
+            Get or set the means
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.Nclusters">
+            <summary>
+            Get or Set the number of clusters
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.Probs">
+            <summary>
+            Get or Set the probabilities
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.StartStep">
+            <summary>
+            Get or Set the start step
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.TermCrit">
+            <summary>
+            Get or Set the termination criteria
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.EMParams.Weights">
+            <summary>
+            Get or Set the weights
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.ERTrees">
+            <summary>
+            Extreme Random tree
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.RTrees">
+            <summary>
+            Random tree
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.RTrees.#ctor">
+            <summary>
+            Create a random tree
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.RTrees.Init">
+            <summary>
+            Initialize the Random tree
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.RTrees.DisposeObject">
+            <summary>
+            Release the random tree and all memory associate with it
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.RTrees.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvRTParams)">
+            <summary>
+            Train the random tree using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varIdx">Can be null if not needed. When specified, identifies variables (features) of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="sampleIdx">Can be null if not needed. When specified, identifies samples of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the random tree</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.RTrees.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte})">
+            <summary>
+            The method takes the feature vector and the optional missing measurement mask on input, traverses the random tree and returns the cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)
+            </summary>
+            <param name="sample">The sample to be predicted</param>
+            <param name="missingDataMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <i>trainData</i>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <returns>The cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)</returns>
+        </member>
+        <member name="P:Emgu.CV.ML.RTrees.TreeCount">
+            <summary>
+            Get the number of Trees in the Random tree
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.RTrees.VarImportance">
+            <summary>
+            Get the variable importance matrix
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.ERTrees.#ctor">
+            <summary>
+            Create an extreme Random tree
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.ERTrees.Init">
+            <summary>
+            Initialize the extreme Randome tree
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.ERTrees.DisposeObject">
+            <summary>
+            Release the extreme random tree and all memory associate with it
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.GBTrees">
+            <summary>
+            Gradient Boosting Tree 
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.GBTrees.#ctor">
+            <summary>
+            Create a default Gradient Boosting Trees 
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.GBTrees.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvGBTreesParams,System.Boolean)">
+            <summary>
+            Train the gradient boost trees using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varIdx">Can be null if not needed. When specified, the elements in the matrix contains the index to the variables (features) of interest. It is a Matrix&gt;int&lt; of nx1 where n %lt;= number of rows in <paramref name="trainData"/></param>
+            <param name="sampleIdx">Can be null if not needed. When specified, the elements in the matrix contains the index to the samples of interest. It is a Matrix&gt;int&lt; of nx1 where n %lt;= number of rows in <paramref name="trainData"/></param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the Gradient Boosting tree</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.GBTrees.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvGBTreesParams,System.Boolean)">
+            <summary>
+            Train the gradient boost trees using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varMask">Can be null if not needed. When specified, it is a mask that identifies variables (features) of interest. It must be a Matrix&gt;Byte&lt; of n x 1 where n is the number of rows in <paramref name="trainData"/></param>
+            <param name="sampleMask">Can be null if not needed. When specified, it is a mask identifies samples of interest. It must be a Matrix&gt;Byte&lt; of nx1, where n is the number of rows in <paramref name="trainData"/></param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the Gradient Boosting tree</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.GBTrees.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvGBTreesParams,System.Boolean)">
+            <summary>
+            Train the gradient boost trees using the specific traning data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="tflag">data layout type</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="param">The parameters for training the Gradient Boosting tree</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.GBTrees.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Single},Emgu.CV.Structure.MCvSlice,System.Boolean)">
+            <summary>
+            The method takes the feature vector and the optional missing measurement mask on input, traverses the random tree and returns the cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)
+            </summary>
+            <param name="sample">The sample to be predicted</param>
+            <param name="missingDataMask">Can be null if not needed. When specified, it is an 8-bit matrix of the same size as <i>trainData</i>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="weakResponses">Can be null if not needed. a floating-point vector, of responses from each individual weak classifier. The number of elements in the vector must be equal to the slice length.</param>
+            <param name="slice">The continuous subset of the sequence of weak classifiers to be used for prediction</param>
+            <param name="rawMode">Normally set to false that implies a regular input. If it is true, the method assumes that all the values of the discrete input variables have been already normalized to 0..num_of_categoriesi-1 ranges. (as the decision tree uses such normalized representation internally). It is useful for faster prediction with tree ensembles. For ordered input variables the flag is not used. </param>    
+            <returns>The cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.GBTrees.DisposeObject">
+            <summary>
+            Release the Gradient Boosting Trees classifier and all the unmanaged memory associate with it
             </summary>
         </member>
         <member name="T:Emgu.CV.ML.KNearest">
@@ -465,115 +531,50 @@
             Create a default KNearest classifier
             </summary>
         </member>
+        <member name="M:Emgu.CV.ML.KNearest.#ctor(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},System.Boolean,System.Int32)">
+            <summary>
+            Creaet a KNearest classifier using the specific traing data
+            </summary>
+            <param name="isRegression">Specify the output variables type. It can be either categorical (isRegression=false) or ordered (isRegression=true)</param>
+            <param name="maxK">The number of maximum neighbors that may be passed to the method findNearest.</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+        </member>
         <member name="M:Emgu.CV.ML.KNearest.DisposeObject">
             <summary>
-            Release the classifier and all the memory associated with it
+            Release the classifer and all the memory associated with it
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.KNearest.DefaultK">
+        <member name="M:Emgu.CV.ML.KNearest.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},System.Boolean,System.Int32,System.Boolean)">
             <summary>
-            Default number of neighbors to use in predict method
+            Update the KNearest classifier using the specific traing data.
             </summary>
+            <param name="isRegression">Specify the output variables type. It can be either categorical (isRegression=false) or ordered (isRegression=true)</param>
+            <param name="maxK">The number of maximum neighbors that may be passed to the method findNearest.</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be null if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="updateBase">
+            If true, the existing classifer is updated using the new training data;
+            Otherwise, the classifier is trained from scratch</param>
+            <returns></returns>
         </member>
-        <member name="P:Emgu.CV.ML.KNearest.IsClassifier">
+        <member name="M:Emgu.CV.ML.KNearest.FindNearest(Emgu.CV.Matrix{System.Single},System.Int32,Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single})">
             <summary>
-            Whether classification or regression model should be trained
+            For each input vector (which are rows of the matrix <paramref name="samples"/>) the method finds k &lt;= get_max_k() nearest neighbor. In case of regression, the predicted result will be a mean value of the particular vector's neighbor responses. In case of classification the class is determined by voting.
             </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.KNearest.Emax">
-            <summary>
-            Parameter for KDTree implementation
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.KNearest.AlgorithmType">
-            <summary>
-            Algorithm type
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.LogisticRegression">
-            <summary>
-            ML implements logistic regression, which is a probabilistic classification technique. 
-            </summary>
-        </member>
-        <member name="M:Emgu.CV.ML.LogisticRegression.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Emgu.CV.ML.LogisticRegression"/> class.
-            </summary>
-        </member>
-        <member name="M:Emgu.CV.ML.LogisticRegression.DisposeObject">
-            <summary>
-            Release the unmanaged resources
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.LogisticRegression.StatModelPtr">
-            <summary>
-            Return the pointer to the StatModel object
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.LogisticRegression.AlgorithmPtr">
-            <summary>
-            Return the pointer to the algorithm object
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.LogisticRegression.LearningRate">
-            <summary>
-            Learning rate
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.LogisticRegression.Iterations">
-            <summary>
-            Number of iterations
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.LogisticRegression.TrainMethod">
-            <summary>
-            Kind of regularization to be applied
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.LogisticRegression.MiniBatchSize">
-            <summary>
-            Specifies the number of training samples taken in each step of Mini-Batch Gradient Descent
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.LogisticRegression.TermCriteria">
-            <summary>
-            Termination criteria of the algorithm
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.LogisticRegression.TrainType">
-            <summary>
-            Specifies the kind of training method used.
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.LogisticRegression.TrainType.Batch">
-            <summary>
-            Batch method
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.LogisticRegression.TrainType.MiniBatch">
-            <summary>
-            Set MiniBatchSize to a positive integer when using this method.
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.LogisticRegression.RegularizationMethod">
-            <summary>
-            Specifies the kind of regularization to be applied. 
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.LogisticRegression.RegularizationMethod.Disable">
-            <summary>
-            Regularization disabled.
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.LogisticRegression.RegularizationMethod.L1">
-            <summary>
-            L1 norm
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.LogisticRegression.RegularizationMethod.L2">
-            <summary>
-            L2 norm
-            </summary>
+            <param name="samples">The sample matrix where each row is a sample</param>
+            <param name="k">The number of nearest neighbor to find</param>
+            <param name="results">
+            Can be null if not needed.
+            If regression, return a mean value of the particular vector's neighbor responses;
+            If classification, return the class determined by voting.
+            </param>
+            <param name="kNearestNeighbors">Should be null if not needed. Setting it to non-null values incures a performance panalty. A matrix of (k * samples.Rows) rows and (samples.Cols) columns that will be filled the data of the K nearest-neighbor for each sample</param>
+            <param name="neighborResponses">Should be null if not needed. The response of the neighbors. A vector of k*_samples->rows elements.</param>
+            <param name="dist">Should be null if not needed. The distances from the input vectors to the neighbors. A vector of k*_samples->rows elements.</param>
+            <returns>In case of regression, the predicted result will be a mean value of the particular vector's neighbor responses. In case of classification the class is determined by voting</returns>
         </member>
         <member name="T:Emgu.CV.ML.NormalBayesClassifier">
             <summary>
@@ -590,348 +591,151 @@
             Release the memory associated with this classifier
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.RTrees">
+        <member name="M:Emgu.CV.ML.NormalBayesClassifier.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Int32},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},System.Boolean)">
             <summary>
-            Random trees
+            Train the classifier using the specific data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varIdx">Can be null if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="sampleIdx">Can be null if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="update">If true, the training data is used to update the classifier; Otherwise, the data in the classifier are cleared before training is performed</param>
+            <returns>The number of done iterations</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.NormalBayesClassifier.Predict(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Int32})">
+            <summary>
+            Given the NormalBayesClassifier, predit the probability of the <paramref name="samples"/>
+            </summary>
+            <param name="samples">The input samples</param>
+            <param name="results">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
+            <returns>In case of classification the method returns the class label, in case of regression - the output function value</returns>
+        </member>
+        <member name="T:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams">
+            <summary>
+            Parameters for Artificla Neural Network - MultiLayer Perceptron
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.RTrees.#ctor">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.term_crit">
             <summary>
-            Create a random tree
+            The termination criteria
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.RTrees.DisposeObject">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.train_method">
             <summary>
-            Release the random tree and all memory associate with it
+            The type of training method
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.MaxCategories">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.bp_dw_scale">
             <summary>
-            Cluster possible values of a categorical variable into K less than or equals maxCategories clusters to find a suboptimal split
+            backpropagation parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.MaxDepth">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.bp_moment_scale">
             <summary>
-            The maximum possible depth of the tree
+            backpropagation parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.MinSampleCount">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.rp_dw0">
             <summary>
-            If the number of samples in a node is less than this parameter then the node will not be split
+            rprop parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.CVFolds">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.rp_dw_plus">
             <summary>
-            If CVFolds greater than 1 then algorithms prunes the built decision tree using K-fold
+            rprop parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.UseSurrogates">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.rp_dw_minus">
             <summary>
-            If true then surrogate splits will be built
+            rprop parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.Use1SERule">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.rp_dw_min">
             <summary>
-            If true then a pruning will be harsher
+            rprop parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.TruncatePrunedTree">
+        <member name="F:Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams.rp_dw_max">
             <summary>
-            If true then pruned branches are physically removed from the tree
+            rprop parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.RegressionAccuracy">
+        <member name="T:Emgu.CV.ML.Structure.MCvBoostParams">
             <summary>
-            Termination criteria for regression trees
+            An OpenCV Boost Tree parameters
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.CalculateVarImportance">
+        <member name="M:Emgu.CV.ML.Structure.MCvBoostParams.GetDefaultParameter">
             <summary>
-            If true then variable importance will be calculated
+            Get the default Decision tree training parameters
+            </summary>
+            <returns>The default Decision tree training parameters</returns>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.maxCategories">
+             <summary>
+             If a discrete variable, on which the training procedure tries to make a split, takes more than max_categories values, the precise best subset estimation may take a very long time (as the algorithm is exponential). Instead, many decision trees engines (including ML) try to find sub-optimal split in this case by clustering all the samples into max_categories clusters (i.e. some categories are merged together).
+            Note that this technique is used only in N(>2)-class classification problems. In case of regression and 2-class classification the optimal split can be found efficiently without employing clustering, thus the parameter is not used in these cases.
+             </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.maxDepth">
+            <summary>
+            This parameter specifies the maximum possible depth of the tree. That is the training algorithms attempts to split a node while its depth is less than max_depth. The actual depth may be smaller if the other termination criteria are met (see the outline of the training procedure in the beginning of the section), and/or if the tree is pruned.
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.ActiveVarCount">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.minSampleCount">
             <summary>
-            The size of the randomly selected subset of features at each tree node and that are used to find the best split(s)
+            A node is not split if the number of samples directed to the node is less than the parameter value. 
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.RTrees.TermCriteria">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.cvFolds">
             <summary>
-            The termination criteria that specifies when the training algorithm stops
+            If this parameter is &gt;1, the tree is pruned using cv_folds-fold cross validation.
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.StatModelExtensions">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.useSurrogates">
             <summary>
-            A statistic model
+            If true, surrogate splits are built. Surrogate splits are needed to handle missing measurements and for variable importance estimation.
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.StatModelExtensions.Save(Emgu.CV.ML.IStatModel,System.String)">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.use1seRule">
             <summary>
-            Save the statistic model to file
-            </summary>
-            <param name="model">The StatModel</param>
-            <param name="fileName">The file name where this StatModel will be saved</param>
-        </member>
-        <member name="M:Emgu.CV.ML.StatModelExtensions.Train(Emgu.CV.ML.IStatModel,Emgu.CV.IInputArray,Emgu.CV.ML.MlEnum.DataLayoutType,Emgu.CV.IInputArray)">
-            <summary>
-            Trains the statistical model.
-            </summary>
-            <param name="model">The stat model.</param>
-            <param name="samples">The training samples.</param>
-            <param name="layoutType">Type of the layout.</param>
-            <param name="responses">Vector of responses associated with the training samples.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Emgu.CV.ML.StatModelExtensions.Train(Emgu.CV.ML.IStatModel,Emgu.CV.ML.TrainData,System.Int32)">
-            <summary>
-            Trains the statistical model.
-            </summary>
-            <param name="model">The model.</param>
-            <param name="trainData">The train data.</param>
-            <param name="flags">The flags.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Emgu.CV.ML.StatModelExtensions.Predict(Emgu.CV.ML.IStatModel,Emgu.CV.IInputArray,Emgu.CV.IOutputArray,System.Int32)">
-            <summary>
-            Predicts response(s) for the provided sample(s)
-            </summary>
-            <param name="model">The model.</param>
-            <param name="samples">The input samples, floating-point matrix.</param>
-            <param name="results">The optional output matrix of results.</param>
-            <param name="flags">The optional flags, model-dependent.</param>
-            <returns>Response for the provided sample</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.StatModelExtensions.Clear(Emgu.CV.ML.IStatModel)">
-            <summary>
-            Clear the statistic model
+            If true, the tree is truncated a bit more by the pruning procedure. That leads to compact, and more resistant to the training data noise, but a bit less accurate decision tree. 
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.SVM">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.truncatePrunedTree">
             <summary>
-            Support Vector Machine 
+            If true, the cut off nodes (with Tn&lt;=CvDTree::pruned_tree_idx) are physically removed from the tree. Otherwise they are kept, and by decreasing CvDTree::pruned_tree_idx (e.g. setting it to -1) it is still possible to get the results from the original un-pruned (or pruned less aggressively) tree. 
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.SVM.#ctor">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.regressionAccuracy">
             <summary>
-            Create a support Vector Machine
+            Another stop criteria - only for regression trees. As soon as the estimated node value differs from the node training samples responses by less than the parameter value, the node is not split further.
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.SVM.DisposeObject">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.priors">
             <summary>
-            Release all the memory associated with the SVM
+            The array of a priori class probabilities, sorted by the class label value. The parameter can be used to tune the decision tree preferences toward a certain class. For example, if users want to detect some rare anomaly occurrence, the training base will likely contain much more normal cases than anomalies, so a very good classification performance will be achieved just by considering every case as normal. To avoid this, the priors can be specified, where the anomaly probability is artificially increased (up to 0.5 or even greater), so the weight of the misclassified anomalies becomes much bigger, and the tree is adjusted properly. 
+            </summary>
+            <remarks>A note about memory management: the field priors  is a pointer to the array of floats. The array should be allocated by user, and released just after the CvDTreeParams structure is passed to CvDTreeTrainData or CvDTree constructors/methods (as the methods make a copy of the array).</remarks>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.boostType">
+            <summary>
+            Boosting type
             </summary>
         </member>
-        <member name="M:Emgu.CV.ML.SVM.GetDefaultGrid(Emgu.CV.ML.SVM.ParamType)">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.weakCount">
             <summary>
-            Get the default parameter grid for the specific SVM type
-            </summary>
-            <param name="type">The SVM type</param>
-            <returns>The default parameter grid for the specific SVM type </returns>
-        </member>
-        <member name="M:Emgu.CV.ML.SVM.TrainAuto(Emgu.CV.ML.TrainData,System.Int32)">
-            <summary>
-            The method trains the SVM model automatically by choosing the optimal parameters C, gamma, p, nu, coef0, degree from CvSVMParams. By the optimality one mean that the cross-validation estimate of the test set error is minimal. 
-            </summary>
-            <param name="trainData">The training data.</param>
-            <param name="kFold">Cross-validation parameter. The training set is divided into k_fold subsets, one subset being used to train the model, the others forming the test set. So, the SVM algorithm is executed k_fold times</param>
-            <returns></returns>
-        </member>
-        <member name="M:Emgu.CV.ML.SVM.TrainAuto(Emgu.CV.ML.TrainData,System.Int32,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,System.Boolean)">
-            <summary>
-            The method trains the SVM model automatically by choosing the optimal parameters C, gamma, p, nu, coef0, degree from CvSVMParams. By the optimality one mean that the cross-validation estimate of the test set error is minimal. 
-            </summary>
-            <param name="trainData">The training data.</param>
-            <param name="kFold">Cross-validation parameter. The training set is divided into k_fold subsets, one subset being used to train the model, the others forming the test set. So, the SVM algorithm is executed k_fold times</param>
-            <param name="cGrid">cGrid</param>
-            <param name="gammaGrid">grid for gamma</param>
-            <param name="pGrid">grid for p</param>
-            <param name="nuGrid">grid for nu</param>
-            <param name="coefGrid">grid for coeff</param>
-            <param name="degreeGrid">grid for degree</param>
-            <param name="balanced">If true and the problem is 2-class classification then the method creates more balanced cross-validation subsets that is proportions between classes in subsets are close to such proportion in the whole train dataset.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Emgu.CV.ML.SVM.GetSupportVectors">
-            <summary>
-            Retrieves all the support vectors.
-            </summary>
-            <returns>All the support vector as floating-point matrix, where support vectors are stored as matrix rows.</returns>
-        </member>
-        <member name="M:Emgu.CV.ML.SVM.SetKernel(Emgu.CV.ML.SVM.SvmKernelType)">
-            <summary>
-            Initialize with one of predefined kernels
+            The number of weak classifiers to build
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.SVM.Type">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.splitCriteria">
             <summary>
-            Type of a SVM formulation
+            Splitting criteria, used to choose optimal splits during a weak tree construction
             </summary>
         </member>
-        <member name="P:Emgu.CV.ML.SVM.Gamma">
+        <member name="F:Emgu.CV.ML.Structure.MCvBoostParams.weightTrimRate">
             <summary>
-            Parameter gamma of a kernel function
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.SVM.Coef0">
-            <summary>
-            Parameter coef0 of a kernel function
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.SVM.Degree">
-            <summary>
-            Parameter degree of a kernel function
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.SVM.C">
-            <summary>
-            Parameter C of a SVM optimization problem
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.SVM.Nu">
-            <summary>
-            Parameter nu of a SVM optimization problem
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.SVM.P">
-            <summary>
-            Parameter epsilon of a SVM optimization problem
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.SVM.TermCriteria">
-            <summary>
-            Termination criteria of the iterative SVM training procedure which solves a partial case of constrained quadratic optimization problem
-            </summary>
-        </member>
-        <member name="P:Emgu.CV.ML.SVM.KernelType">
-            <summary>
-            Type of a SVM kernel
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.SVM.SvmType">
-            <summary>
-            Type of SVM
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmType.CSvc">
-            <summary>
-            n-class classification (n>=2), allows imperfect separation of classes with penalty multiplier C for outliers
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmType.NuSvc">
-            <summary>
-            n-class classification with possible imperfect separation. Parameter nu (in the range 0..1, the larger the value, the smoother the decision boundary) is used instead of C
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmType.OneClass">
-            <summary>
-            one-class SVM. All the training data are from the same class, SVM builds a boundary that separates the class from the rest of the feature space
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmType.EpsSvr">
-            <summary>
-            Regression. The distance between feature vectors from the training set and the fitting hyper-plane must be less than p. For outliers the penalty multiplier C is used
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmType.NuSvr">
-            <summary>
-            Regression; nu is used instead of p.
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.SVM.SvmKernelType">
-            <summary>
-            SVM kernel type
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmKernelType.Custom">
-            <summary>
-            Custom svm kernel type
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmKernelType.Linear">
-            <summary>
-            No mapping is done, linear discrimination (or regression) is done in the original feature space. It is the fastest option. d(x,y) = x y == (x,y)
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmKernelType.Poly">
-            <summary>
-            polynomial kernel: d(x,y) = (gamma*(xy)+coef0)^degree
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmKernelType.Rbf">
-            <summary>
-            Radial-basis-function kernel; a good choice in most cases: d(x,y) = exp(-gamma*|x-y|^2)
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmKernelType.Sigmoid">
-            <summary>
-            sigmoid function is used as a kernel: d(x,y) = tanh(gamma*(xy)+coef0)
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmKernelType.Chi2">
-            <summary>
-            Exponential Chi2 kernel, similar to the RBF kernel
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.SvmKernelType.Inter">
-            <summary>
-            Histogram intersection kernel. A fast kernel. K(xi,xj)=min(xi,xj).
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.SVM.ParamType">
-            <summary>
-            The type of SVM parameters
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.ParamType.C">
-            <summary>
-            C
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.ParamType.Gamma">
-            <summary>
-            Gamma
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.ParamType.P">
-            <summary>
-            P
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.ParamType.Nu">
-            <summary>
-            NU
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.ParamType.Coef">
-            <summary>
-            COEF
-            </summary>
-        </member>
-        <member name="F:Emgu.CV.ML.SVM.ParamType.Degree">
-            <summary>
-            DEGREE
-            </summary>
-        </member>
-        <member name="T:Emgu.CV.ML.TrainData">
-            <summary>
-            Train data
-            </summary>
-        </member>
-        <member name="M:Emgu.CV.ML.TrainData.#ctor(Emgu.CV.IInputArray,Emgu.CV.ML.MlEnum.DataLayoutType,Emgu.CV.IInputArray,Emgu.CV.IInputArray,Emgu.CV.IInputArray,Emgu.CV.IInputArray,Emgu.CV.IInputArray)">
-            <summary>
-            Creates training data from in-memory arrays.
-            </summary>
-            <param name="samples">Matrix of samples. It should have CV_32F type.</param>
-            <param name="layoutType">Type of the layout.</param>
-            <param name="response">Matrix of responses. If the responses are scalar, they should be stored as a single row or as a single column. The matrix should have type CV_32F or CV_32S (in the former case the responses are considered as ordered by default; in the latter case - as categorical)</param>
-            <param name="varIdx">Vector specifying which variables to use for training. It can be an integer vector (CV_32S) containing 0-based variable indices or byte vector (CV_8U) containing a mask of active variables.</param>
-            <param name="sampleIdx">Vector specifying which samples to use for training. It can be an integer vector (CV_32S) containing 0-based sample indices or byte vector (CV_8U) containing a mask of training samples.</param>
-            <param name="sampleWeight">Optional vector with weights for each sample. It should have CV_32F type.</param>
-            <param name="varType">Optional vector of type CV_8U and size &lt;number_of_variables_in_samples&gt; + &lt;number_of_variables_in_responses&gt;, containing types of each input and output variable.</param>
-        </member>
-        <member name="M:Emgu.CV.ML.TrainData.DisposeObject">
-            <summary>
-            Release the unmanaged resources
+            The weight trimming ratio, within 0..1. See the discussion of it above. If the parameter is ?0 or >1, the trimming is not used, all the samples are used at each iteration. The default value is 0.95
             </summary>
         </member>
         <member name="T:Emgu.CV.ML.Structure.MCvDTreeNode">
@@ -1045,6 +849,64 @@
             Cross-validation pruning data
             </summary>
         </member>
+        <member name="T:Emgu.CV.ML.Structure.MCvDTreeParams">
+            <summary>
+            Parameters OpenCV's decision tree parameters
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.Structure.MCvDTreeParams.GetDefaultParameter">
+            <summary>
+            Get the default Decision tree training parameters
+            </summary>
+            <returns>The default Decision tree training parameters</returns>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.maxCategories">
+             <summary>
+             If a discrete variable, on which the training procedure tries to make a split, takes more than max_categories values, the precise best subset estimation may take a very long time (as the algorithm is exponential). Instead, many decision trees engines (including ML) try to find sub-optimal split in this case by clustering all the samples into max_categories clusters (i.e. some categories are merged together).
+            Note that this technique is used only in N(>2)-class classification problems. In case of regression and 2-class classification the optimal split can be found efficiently without employing clustering, thus the parameter is not used in these cases.
+             </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.maxDepth">
+            <summary>
+            This parameter specifies the maximum possible depth of the tree. That is the training algorithms attempts to split a node while its depth is less than max_depth. The actual depth may be smaller if the other termination criteria are met (see the outline of the training procedure in the beginning of the section), and/or if the tree is pruned.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.minSampleCount">
+            <summary>
+            A node is not split if the number of samples directed to the node is less than the parameter value. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.cvFolds">
+            <summary>
+            If this parameter is &gt;1, the tree is pruned using cv_folds-fold cross validation.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.useSurrogates">
+            <summary>
+            If true, surrogate splits are built. Surrogate splits are needed to handle missing measurements and for variable importance estimation.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.use1seRule">
+            <summary>
+            If true, the tree is truncated a bit more by the pruning procedure. That leads to compact, and more resistant to the training data noise, but a bit less accurate decision tree. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.truncatePrunedTree">
+            <summary>
+            If true, the cut off nodes (with Tn&lt;=CvDTree::pruned_tree_idx) are physically removed from the tree. Otherwise they are kept, and by decreasing CvDTree::pruned_tree_idx (e.g. setting it to -1) it is still possible to get the results from the original un-pruned (or pruned less aggressively) tree. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.regressionAccuracy">
+            <summary>
+            Another stop criteria - only for regression trees. As soon as the estimated node value differs from the node training samples responses by less than the parameter value, the node is not split further.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvDTreeParams.priors">
+            <summary>
+            The array of a priori class probabilities, sorted by the class label value. The parameter can be used to tune the decision tree preferences toward a certain class. For example, if users want to detect some rare anomaly occurrence, the training base will likely contain much more normal cases than anomalies, so a very good classification performance will be achieved just by considering every case as normal. To avoid this, the priors can be specified, where the anomaly probability is artificially increased (up to 0.5 or even greater), so the weight of the misclassified anomalies becomes much bigger, and the tree is adjusted properly. 
+            </summary>
+            <remarks>A note about memory management: the field priors  is a pointer to the array of floats. The array should be allocated by user, and released just after the CvDTreeParams structure is passed to CvDTreeTrainData or CvDTree constructors/methods (as the methods make a copy of the array).</remarks>
+        </member>
         <member name="T:Emgu.CV.ML.Structure.MCvDTreeSplit">
             <summary>
             Decision tree node split
@@ -1097,6 +959,700 @@
             Used internally by the training algorithm
             </summary>
         </member>
+        <member name="T:Emgu.CV.ML.Structure.MCvEMParams">
+            <summary>
+            Wrapped CvEMParams
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.nclusters">
+            <summary>
+            The number of mixtures
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.cov_mat_type">
+            <summary>
+            The type of the mixture covariation matrices
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.start_step">
+            <summary>
+            The initial step the algorithm starts from
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.probs">
+            <summary>
+            Initial probabilities p_i,k; are used (and must be not NULL) only when start_step=CvEM::START_M_STEP
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.weights">
+            <summary>
+            Initial mixture weights pi_k; are used (if not NULL) only when start_step=CvEM::START_E_STEP
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.means">
+            <summary>
+            Initial mixture means a_k; are used (and must be not NULL) only when start_step=CvEM::START_E_STEP.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.covs">
+            <summary>
+            Initial mixture covariation matrices S_k; are used (if not NULL) only when start_step=CvEM::START_E_STEP.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvEMParams.term_crit">
+            <summary>
+            Termination criteria of the procedure. EM algorithm stops either after a certain number of iterations (term_crit.num_iter), or when the parameters change too little (no more than term_crit.epsilon) from iteration to iteration
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.Structure.MCvGBTreesParams">
+            <summary>
+            An OpenCV Gradient Boosting Tree parameters
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.Structure.MCvGBTreesParams.GetDefaultParameter">
+            <summary>
+            Get the default Decision tree training parameters
+            </summary>
+            <returns>The default Decision tree training parameters</returns>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.maxCategories">
+            <summary>
+            If a discrete variable, on which the training procedure tries to make a split, takes more than max_categories values, the precise best subset estimation may take a very long time (as the algorithm is exponential). Instead, many decision trees engines (including ML) try to find sub-optimal split in this case by clustering all the samples into max_categories clusters (i.e. some categories are merged together).
+            Note that this technique is used only in N(>2)-class classification problems. In case of regression and 2-class classification the optimal split can be found efficiently without employing clustering, thus the parameter is not used in these cases.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.maxDepth">
+            <summary>
+            This parameter specifies the maximum possible depth of the tree. That is the training algorithms attempts to split a node while its depth is less than max_depth. The actual depth may be smaller if the other termination criteria are met (see the outline of the training procedure in the beginning of the section), and/or if the tree is pruned.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.minSampleCount">
+            <summary>
+            A node is not split if the number of samples directed to the node is less than the parameter value. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.cvFolds">
+            <summary>
+            If this parameter is &gt;1, the tree is pruned using cv_folds-fold cross validation.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.useSurrogates">
+            <summary>
+            If true, surrogate splits are built. Surrogate splits are needed to handle missing measurements and for variable importance estimation.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.use1seRule">
+            <summary>
+            If true, the tree is truncated a bit more by the pruning procedure. That leads to compact, and more resistant to the training data noise, but a bit less accurate decision tree. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.truncatePrunedTree">
+            <summary>
+            If true, the cut off nodes (with Tn&lt;=CvDTree::pruned_tree_idx) are physically removed from the tree. Otherwise they are kept, and by decreasing CvDTree::pruned_tree_idx (e.g. setting it to -1) it is still possible to get the results from the original un-pruned (or pruned less aggressively) tree. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.regressionAccuracy">
+            <summary>
+            Another stop criteria - only for regression trees. As soon as the estimated node value differs from the node training samples responses by less than the parameter value, the node is not split further.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.priors">
+            <summary>
+            The array of a priori class probabilities, sorted by the class label value. The parameter can be used to tune the decision tree preferences toward a certain class. For example, if users want to detect some rare anomaly occurrence, the training base will likely contain much more normal cases than anomalies, so a very good classification performance will be achieved just by considering every case as normal. To avoid this, the priors can be specified, where the anomaly probability is artificially increased (up to 0.5 or even greater), so the weight of the misclassified anomalies becomes much bigger, and the tree is adjusted properly. 
+            </summary>
+            <remarks>A note about memory management: the field priors  is a pointer to the array of floats. The array should be allocated by user, and released just after the CvDTreeParams structure is passed to CvDTreeTrainData or CvDTree constructors/methods (as the methods make a copy of the array).</remarks>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.WeakCount">
+            <summary>
+            Count of trees in the ensemble
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.LossFunctionType">
+            <summary>
+            Loss function used for ensemble training
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.SubsamplePortion">
+            <summary>
+            Portion of whole training set used for every single tree training.
+            subsamplePortion value is in (0.0, 1.0].
+            subsamplePortion == 1.0 when whole dataset is used on each step. Count of sample used on each
+            step is computed as int(totalSamplesCount * subsamplePortion).
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvGBTreesParams.Shrinkage">
+            <summary>
+            Regularization parameter. Each tree prediction is multiplied on shrinkage value.
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlInvoke">
+            <summary>
+            This class contains functions to call into machine learning library
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.StatModelSave(System.IntPtr,System.String,System.IntPtr)">
+            <summary>
+            Save the statistic model to the specific file
+            </summary>
+            <param name="statModel">The statistic model to save</param>
+            <param name="fileName">The file name to save to</param>
+            <param name="name">Pass IntPtr.Zero</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.StatModelLoad(System.IntPtr,System.String,System.IntPtr)">
+            <summary>
+            Load the statistic model from the specific file
+            </summary>
+            <param name="statModel">The statistic model to save</param>
+            <param name="fileName">The file name to load from</param>
+            <param name="name">Pass IntPtr.Zero</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.StatModelClear(System.IntPtr)">
+            <summary>
+            Clear the statistic model
+            </summary>
+            <param name="statModel">The model to be cleared</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvNormalBayesClassifierDefaultCreate">
+            <summary>
+            Create a normal bayes classifier
+            </summary>
+            <returns>The normal bayes classifier</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvNormalBayesClassifierCreate(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Create a normal Bayes classifier using the specific training data
+            </summary>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varIdx">Can be IntPtr.Zero if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <returns>The normal Beyes classifier</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvNormalBayesClassifierRelease(System.IntPtr@)">
+            <summary>
+            Release the memory associated with the bayes classifier
+            </summary>
+            <param name="classifier">The classifier to release</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvNormalBayesClassifierTrain(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Boolean)">
+            <summary>
+            Train the classifier using the specific data
+            </summary>
+            <param name="classifier">The NormalBayesClassifier</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="varIdx">Can be IntPtr.Zero if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="update">If true, the training data is used to update the classifier; Otherwise, the data in the classifier are cleared before training is performed</param>
+            <returns>The number of done iterations</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvNormalBayesClassifierPredict(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Given the NormalBayesClassifier <paramref name="model"/>, predit the probability of the <paramref name="samples"/>
+            </summary>
+            <param name="model">The NormalBayesClassifier classifier model</param>
+            <param name="samples">The input samples</param>
+            <param name="results">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
+            <returns>In case of classification the method returns the class label, in case of regression - the output function value</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvKNearestDefaultCreate">
+            <summary>
+            Create a KNearest classifier
+            </summary>
+            <returns>The KNearest classifier</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvKNearestRelease(System.IntPtr@)">
+            <summary>
+            Release the KNearest classifer
+            </summary>
+            <param name="knearest">The classifier to release</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvKNearestCreate(System.IntPtr,System.IntPtr,System.IntPtr,System.Boolean,System.Int32)">
+            <summary>
+            Create the KNearest classifier using the specific traing data.
+            </summary>
+            <param name="isRegression">Specify the output variables type. It can be either categorical (isRegression=false) or ordered (isRegression=true)</param>
+            <param name="maxK">The number of maximum neighbors that may be passed to the method findNearest.</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <returns>The KNearest classifier</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvKNearestTrain(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            Update the KNearest classifier using the specific traing data.
+            </summary>
+            <param name="isRegression">Specify the output variables type. It can be either categorical (isRegression=false) or ordered (isRegression=true)</param>
+            <param name="maxK">The number of maximum neighbors that may be passed to the method findNearest.</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="classifier">The KNearest classifier to be updated</param>
+            <param name="updateBase">
+            If true, the existing classifer is updated using the new training data;
+            Otherwise, the classifier is trained from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvKNearestFindNearest(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr,System.IntPtr[],System.IntPtr,System.IntPtr)">
+            <summary>
+            For each input vector (which are rows of the matrix <paramref name="samples"/>) the method finds k &lt;= get_max_k() nearest neighbor. In case of regression, the predicted result will be a mean value of the particular vector's neighbor responses. In case of classification the class is determined by voting.
+            </summary>
+            <param name="classifier">The KNearest classifier</param>
+            <param name="samples">The sample matrix where each row is a sample</param>
+            <param name="k">The number of nearest neighbor to find</param>
+            <param name="results">
+            Can be IntPtr.Zero if not needed.
+            If regression, return a mean value of the particular vector's neighbor responses;
+            If classification, return the class determined by voting.
+            </param>
+            <param name="kNearestNeighbors">Should be IntPtr.Zero if not needed. Setting it to non-null values incures a performance panalty. A matrix of (k * samples.Rows) rows and (samples.Cols) columns that will be filled the data of the K nearest-neighbor for each sample</param>
+            <param name="neighborResponses">Should be IntPtr.Zero if not needed. The response of the neighbors. A vector of k*_samples->rows elements.</param>
+            <param name="dist">Should be IntPtr.Zero if not needed. The distances from the input vectors to the neighbors. A vector of k*_samples->rows elements.</param>
+            <returns>In case of regression, the predicted result will be a mean value of the particular vector's neighbor responses. In case of classification the class is determined by voting</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMDefaultCreate(System.Int32,Emgu.CV.ML.MlEnum.EM_COVARIAN_MATRIX_TYPE,Emgu.CV.Structure.MCvTermCriteria)">
+            <summary>
+            Create a default EM model
+            </summary>
+            <param name="nclusters">The number of mixture components in the Gaussian mixture model. Use 5 for default.</param>
+            <param name="covMatType">Constraint on covariance matrices which defines type of matrices</param>
+            <param name="termcrit">The termination criteria of the EM algorithm. The EM algorithm can be terminated by the number of iterations termCrit.maxCount (number of M-steps) or when relative change of likelihood logarithm is less than termCrit.epsilon. Default maximum number of iterations is 100</param>
+            <returns>Pointer to the EM model</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMRelease(System.IntPtr@)">
+            <summary>
+            Release the EM model
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMTrain(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Starts with Expectation step. Initial values of the model parameters will be estimated by the k-means algorithm.
+            </summary>
+            <param name="model">The EM model</param>
+            <param name="samples">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="labels">Can be IntPtr.Zero if not needed. Optionally computed output "class label" for each sample</param>
+            <param name="logLikelihoods">The optional output matrix that contains a likelihood logarithm value for each sample. It has nsamples x 1 size and CV_64FC1 type.</param>
+            <param name="probs">Initial probabilities p_{i,k} of sample i to belong to mixture component k. It is a one-channel floating-point matrix of nsamples x nclusters size.</param>
+            <returns>The methods return true if the Gaussian mixture model was trained successfully, otherwise it returns false.</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMPredict(System.IntPtr,System.IntPtr,System.IntPtr,System.Double@)">
+            <summary>
+            Given the EM <paramref name="model"/>, predit the probability of the <paramref name="samples"/>
+            </summary>
+            <param name="model">The EM model</param>
+            <param name="samples">The input samples</param>
+            <param name="probs">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
+            <param name="likelihood">The likelihood logarithm value</param>
+            <returns>In case of classification the method returns the class label, in case of regression - the output function value</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyDefaultCreate">
+            <summary>
+            Create a default EM model
+            </summary>
+            <returns>Pointer to the EM model</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyRelease(System.IntPtr@)">
+            <summary>
+            Release the EM model
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyTrain(System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvEMParams,System.IntPtr)">
+            <summary>
+            Train the EM model using the specific training data
+            </summary>
+            <param name="model">The EM model</param>
+            <param name="samples">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="parameters">The parameters for EM</param>
+            <param name="labels">Can be IntPtr.Zero if not needed. Optionally computed output "class label" for each sample</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyPredict(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Given the EM <paramref name="model"/>, predit the probability of the <paramref name="samples"/>
+            </summary>
+            <param name="model">The EM model</param>
+            <param name="samples">The input samples</param>
+            <param name="probs">The prediction results, should have the same # of rows as the <paramref name="samples"/></param>
+            <returns>In case of classification the method returns the class label, in case of regression - the output function value</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyGetMeans(System.IntPtr)">
+            <summary>
+            Get the means of the clusters from the EM model
+            </summary>
+            <param name="model">The EM model</param>
+            <returns>The means of the clusters of the EM model</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyGetCovs(System.IntPtr)">
+            <summary>
+            Get the covariance matrices of the clusters from the EM model
+            </summary>
+            <param name="model">The EM model</param>
+            <returns>The covariance matrices of the clusters of the EM model</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyGetWeights(System.IntPtr)">
+            <summary>
+            Get the weights of the clusters from the EM model
+            </summary>
+            <param name="model">The EM model</param>
+            <returns>The weights of the clusters of the EM model</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyGetProbs(System.IntPtr)">
+            <summary>
+            Get the probabilities from the EM model
+            </summary>
+            <param name="model">The EM model</param>
+            <returns>The probabilities of the EM model </returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvEMLegacyGetNclusters(System.IntPtr)">
+            <summary>
+            Get the number of clusters from the EM model
+            </summary>
+            <param name="model">The EM model</param>
+            <returns>The number of clusters of the EM model</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMDefaultCreate">
+            <summary>
+            Create a default SVM model
+            </summary>
+            <returns>Pointer to the SVM model</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMRelease(System.IntPtr@)">
+            <summary>
+            Release the SVM model and all the memory associated to ir
+            </summary>
+            <param name="model">The SVM model to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMTrain(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvSVMParams@)">
+            <summary>
+            Train the SVM model with the specific paramters
+            </summary>
+            <param name="model">The SVM model</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix</param>
+            <param name="responses">The response for the training data. It's usually a 32-bit floating point matrix; In classification problem, it can be an Int32 matrix.</param>
+            <param name="varIdx">Can be IntPtr.Zero if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="parameters">The parameters for SVM</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMGetDefaultGrid(Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE,Emgu.CV.ML.Structure.MCvParamGrid@)">
+            <summary>
+            Get the default parameter grid for the specific SVM type
+            </summary>
+            <param name="type">The SVM type</param>
+            <param name="grid">The parameter grid reference, values will be filled in by the funtion call</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMTrainAuto(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvSVMParams@,System.Int32,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@,Emgu.CV.ML.Structure.MCvParamGrid@)">
+            <summary>
+            The method trains the SVM model automatically by choosing the optimal parameters C, gamma, p, nu, coef0, degree from CvSVMParams. By the optimality one mean that the cross-validation estimate of the test set error is minimal. 
+            </summary>
+            <param name="model">The SVM model</param>
+            <param name="trainData">The training data.</param>
+            <param name="responses">The response for the training data.</param>
+            <param name="varIdx">Can be null if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="sampleIdx">Can be null if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="parameters">The parameters for SVM</param>
+            <param name="kFold">Cross-validation parameter. The training set is divided into k_fold subsets, one subset being used to train the model, the others forming the test set. So, the SVM algorithm is executed k_fold times</param>
+            <param name="cGrid">cGrid</param>
+            <param name="gammaGrid">gammaGrid</param>
+            <param name="pGrid">pGrid</param>
+            <param name="nuGrid">nuGrid</param>
+            <param name="coefGrid">coedGrid</param>
+            <param name="degreeGrid">degreeGrid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMGetParameters(System.IntPtr,Emgu.CV.ML.Structure.MCvSVMParams@)">
+            <summary>
+            Get the parameters of the SVM model
+            </summary>
+            <param name="model">The SVM model</param>
+            <param name="param">The parameters of the SVM model</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMPredict(System.IntPtr,System.IntPtr)">
+            <summary>
+            Predicts response for the input sample.
+            </summary>
+            <param name="model">The SVM model</param>
+            <param name="_sample">The input sample</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMGetSupportVector(System.IntPtr,System.Int32)">
+            <summary>
+            The method retrieves a given support vector
+            </summary>
+            <param name="model">The SVM model</param>
+            <param name="i">The index of the support vector</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMGetSupportVectorCount(System.IntPtr)">
+            <summary>
+            The method retrieves the number of support vectors
+            </summary>
+            <param name="model">The SVM model</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvSVMGetVarCount(System.IntPtr)">
+            <summary>
+            The method retrieves the number of vars
+            </summary>
+            <param name="model">The SVM model</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvANN_MLPCreate(System.IntPtr,Emgu.CV.ML.MlEnum.ANN_MLP_ACTIVATION_FUNCTION,System.Double,System.Double)">
+            <summary>
+            Create a neural network using the specific parameters
+            </summary>
+            <param name="layerSizes">The size of the layer</param>
+            <param name="activeFunction">Activation function</param>
+            <param name="fParam1">Free parameters of the activation function, alpha</param>
+            <param name="fParam2">Free parameters of the activation function, beta</param>
+            <returns>The nearual network created</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvANN_MLPRelease(System.IntPtr@)">
+            <summary>
+            Release the ANN_MLP model
+            </summary>
+            <param name="model">The ANN_MLP model to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvANN_MLPTrain(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvANN_MLP_TrainParams@,Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG)">
+            <summary>
+            Train the ANN_MLP model with the specific paramters
+            </summary>
+            <param name="model">The ANN_MLP model</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleWeights">(RPROP only) The optional floating-point vector of weights for each sample. Some samples may be more important than others for training, e.g. user may want to gain the weight of certain classes to find the right balance between hit-rate and false-alarm rate etc</param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="parameters">The parameters for ANN_MLP</param>
+            <param name="flags">The traning flag</param>
+            <returns>The number of done iterations</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvANN_MLPPredict(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Given the <paramref name="model"/>, predit the <paramref name="outputs"/> response of the <paramref name="inputs"/> samples
+            </summary>
+            <param name="model">The ANN_MLP model</param>
+            <param name="inputs">The input samples</param>
+            <param name="outputs">The prediction results, should have the same # of rows as the inputs</param>
+            <returns>In case of classification the method returns the class label, in case of regression - the output function value</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvANN_MLPGetLayerCount(System.IntPtr)">
+            <summary>
+            Get the number of layers in the ANN_MLP
+            </summary>
+            <param name="model">The ANN_MLP model</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvDTreeParamsCreate">
+            <summary>
+            Create default parameters for CvDTreeParams
+            </summary>
+            <returns>Pointer to the default CvDTreeParams</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvDTreeParamsRelease(System.IntPtr@)">
+            <summary>
+            Release the CvDTreeParams
+            </summary>
+            <param name="dTreeParam">Pointer to the decision tree parameters to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvDTreeCreate">
+            <summary>
+            Create a default decision tree
+            </summary>
+            <returns>Pointer to the decision tree</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvDTreeRelease(System.IntPtr@)">
+            <summary>
+            Release the decision tree model
+            </summary>
+            <param name="model">The decision tree model to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvDTreeTrain(System.IntPtr,System.IntPtr,Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvDTreeParams)">
+            <summary>
+            Train the decision tree using the specific training data
+            </summary>
+            <param name="model">The Decision Tree model</param>
+            <param name="tflag">The data layout type of the train data</param>
+            <param name="varIdx">Can be IntPtr.Zero if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="varType">The types of input variables</param>
+            <param name="missingMask">Can be IntPtr.Zero if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="param">The parameters for training the decision tree</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvDTreePredict(System.IntPtr,System.IntPtr,System.IntPtr,System.Boolean)">
+            <summary>
+            The method takes the feature vector and the optional missing measurement mask on input, traverses the decision tree and returns the reached leaf node on output. The prediction result, either the class label or the estimated function value, may be retrieved as value field of the CvDTreeNode structure
+            </summary>
+            <param name="model">The decision tree model</param>
+            <param name="sample">The sample to be predicted</param>
+            <param name="missingDataMask">Can be IntPtr.Zero if not needed. When specified, it is an 8-bit matrix of the same size as <i>trainData</i>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="rawMode">Normally set to false that implies a regular input. If it is true, the method assumes that all the values of the discrete input variables have been already normalized to 0..num_of_categoriesi-1 ranges. (as the decision tree uses such normalized representation internally). It is useful for faster prediction with tree ensembles. For ordered input variables the flag is not used. </param>
+            <returns>Pointer to the reached leaf node on output. The prediction result, either the class label or the estimated function value, may be retrieved as value field of the CvDTreeNode structure</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTParamsCreate">
+            <summary>
+            Create default parameters for CvRTParams
+            </summary>
+            <returns>Pointer to the default CvRTParams</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTParamsRelease(System.IntPtr@)">
+            <summary>
+            Release the CvRTParams
+            </summary>
+            <param name="rTreesParam">Pointer to the random tree parameters to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTreesCreate">
+            <summary>
+            Create a default random tree
+            </summary>
+            <returns>Pointer to the random tree</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTreesRelease(System.IntPtr@)">
+            <summary>
+            Release the random tree model
+            </summary>
+            <param name="model">The random tree model to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTreesGetTreeCount(System.IntPtr)">
+            <summary>
+            Get the number of Trees in the Random tree
+            </summary>
+            <param name="model">The random tree</param>
+            <returns>The number of Trees in the Random tree</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTreesTrain(System.IntPtr,System.IntPtr,Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvRTParams)">
+            <summary>
+            Train the random tree using the specific traning data
+            </summary>
+            <param name="model">The Random Tree model</param>
+            <param name="tFlag">The data layout type of the train data</param>
+            <param name="missingMask">Can be IntPtr.Zero if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="param">The parameters for training the random tree</param>
+            <param name="varIdx">Can be IntPtr.Zero if not needed. When specified, identifies variables (features) of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="varType">The types of input variables</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTreesPredict(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            The method takes the feature vector and the optional missing measurement mask on input, traverses the random tree and returns the cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)
+            </summary>
+            <param name="model">The decision tree model</param>
+            <param name="sample">The sample to be predicted</param>
+            <param name="missingDataMask">Can be IntPtr.Zero if not needed. When specified, it is an 8-bit matrix of the same size as <i>trainData</i>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <returns>The cumulative result from all the trees in the forest (the class that receives the majority of voices, or the mean of the regression function estimates)</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvRTreesGetVarImportance(System.IntPtr)">
+            <summary>
+            Get the variable importance
+            </summary>
+            <param name="model">The randome tree</param>
+            <returns>Pointer to the matrix that represents the variable importance</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvERTreesCreate">
+            <summary>
+            Create a default extreme random tree
+            </summary>
+            <returns>Pointer to the extreme random tree</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvERTreesRelease(System.IntPtr@)">
+            <summary>
+            Release the extreme random tree model
+            </summary>
+            <param name="model">The extreme random tree model to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvBoostParamsCreate">
+            <summary>
+            Create default parameters for CvBoost
+            </summary>
+            <returns>Pointer to the default CvBoostParams</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvBoostParamsRelease(System.IntPtr@)">
+            <summary>
+            Release the CvBoostParams
+            </summary>
+            <param name="bTreeParam">Pointer to the boost tree parameters to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvBoostTrain(System.IntPtr,System.IntPtr,Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvBoostParams@,System.Boolean)">
+            <summary>
+            Train the boost tree using the specific traning data
+            </summary>
+            <param name="model">The Boost Tree model</param>
+            <param name="tFlag">The data layout type of the train data</param>
+            <param name="missingMask">Can be IntPtr.Zero if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="param">The parameters for training the random tree</param>
+            <param name="varIdx">Can be IntPtr.Zero if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="varType">The types of input variables</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvBoostPredict(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.Structure.MCvSlice,System.Boolean)">
+            <summary>
+            Runs the sample through the trees in the ensemble and returns the output class label based on the weighted voting
+            </summary>
+            <param name="model">The Boost Tree model</param>
+            <param name="sample">The input sample</param>
+            <param name="missing">Can be IntPtr.Zero if not needed. The optional mask of missing measurements. To handle missing measurements, the weak classifiers must include surrogate splits</param>
+            <param name="weakResponses">Can be IntPtr.Zero if not needed. a floating-point vector, of responses from each individual weak classifier. The number of elements in the vector must be equal to the slice length.</param>
+            <param name="slice">The continuous subset of the sequence of weak classifiers to be used for prediction</param>
+            <param name="rawMode">Normally set to false that implies a regular input. If it is true, the method assumes that all the values of the discrete input variables have been already normalized to 0..num_of_categoriesi-1 ranges. (as the decision tree uses such normalized representation internally). It is useful for faster prediction with tree ensembles. For ordered input variables the flag is not used. </param>      
+            <returns>The output class label based on the weighted voting</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvBoostCreate">
+            <summary>
+            Create a default boost classicfier
+            </summary>
+            <returns>Pointer to the boost classicfier</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvBoostRelease(System.IntPtr@)">
+            <summary>
+            Release the boost classicfier
+            </summary>
+            <param name="model">The boost classicfier to be released</param>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvGBTreesTrain(System.IntPtr,System.IntPtr,Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.ML.Structure.MCvGBTreesParams@,System.Boolean)">
+            <summary>
+            Train the boost tree using the specific traning data
+            </summary>
+            <param name="model">The Boost Tree model</param>
+            <param name="tFlag">The data layout type of the train data</param>
+            <param name="missingMask">Can be IntPtr.Zero if not needed. When specified, it is an 8-bit matrix of the same size as <paramref name="trainData"/>, is used to mark the missed values (non-zero elements of the mask)</param>
+            <param name="trainData">The training data. A 32-bit floating-point, single-channel matrix, one vector per row</param>
+            <param name="responses">A floating-point matrix of the corresponding output vectors, one vector per row. </param>
+            <param name="sampleIdx">Can be IntPtr.Zero if not needed. When specified, identifies samples of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="param">The parameters for training the random tree</param>
+            <param name="varIdx">Can be IntPtr.Zero if not needed. When specified, identifies variables (features) of interest. It is a Matrix&gt;int&lt; of nx1</param>
+            <param name="varType">The types of input variables</param>
+            <param name="update">specifies whether the classifier needs to be updated (i.e. the new weak tree classifiers added to the existing ensemble), or the classifier needs to be rebuilt from scratch</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvGBTreesPredict(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,Emgu.CV.Structure.MCvSlice,System.Boolean)">
+            <summary>
+            Runs the sample through the trees in the ensemble and returns the output class label based on the weighted voting
+            </summary>
+            <param name="model">The Boost Tree model</param>
+            <param name="sample">The input sample</param>
+            <param name="missing">Can be IntPtr.Zero if not needed. The optional mask of missing measurements. To handle missing measurements, the weak classifiers must include surrogate splits</param>
+            <param name="weakResponses">Can be IntPtr.Zero if not needed. a floating-point vector, of responses from each individual weak classifier. The number of elements in the vector must be equal to the slice length.</param>
+            <param name="slice">The continuous subset of the sequence of weak classifiers to be used for prediction</param>
+            <param name="rawMode">Normally set to false that implies a regular input. If it is true, the method assumes that all the values of the discrete input variables have been already normalized to 0..num_of_categoriesi-1 ranges. (as the decision tree uses such normalized representation internally). It is useful for faster prediction with tree ensembles. For ordered input variables the flag is not used. </param>      
+            <returns>The output class label based on the weighted voting</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvGBTreesCreate">
+            <summary>
+            Create a default Gradient Boosting Trees (GBT)
+            </summary>
+            <returns>Pointer to the Gradient Boosting Trees (GBT)</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.MlInvoke.CvGBTreesRelease(System.IntPtr@)">
+            <summary>
+            Release the Gradient Boosting Trees (GBT)
+            </summary>
+            <param name="model">The Gradient Boosting Trees (GBT) to be released</param>
+        </member>
         <member name="T:Emgu.CV.ML.Structure.MCvParamGrid">
             <summary>
             Wrapped CvParamGrid structure used by SVM
@@ -1117,109 +1673,608 @@
             step
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.MlEnum.AnnMlpTrainingFlag">
+        <member name="T:Emgu.CV.ML.Structure.MCvRTParams">
+            <summary>
+            Wrapped CvRTParams structure
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.Structure.MCvRTParams.GetDefaultParameter">
+            <summary>
+            Get the default Decision tree training parameters
+            </summary>
+            <returns>The default Decision tree training parameters</returns>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.maxCategories">
+             <summary>
+             If a discrete variable, on which the training procedure tries to make a split, takes more than max_categories values, the precise best subset estimation may take a very long time (as the algorithm is exponential). Instead, many decision trees engines (including ML) try to find sub-optimal split in this case by clustering all the samples into max_categories clusters (i.e. some categories are merged together).
+            Note that this technique is used only in N(>2)-class classification problems. In case of regression and 2-class classification the optimal split can be found efficiently without employing clustering, thus the parameter is not used in these cases.
+             </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.maxDepth">
+            <summary>
+            This parameter specifies the maximum possible depth of the tree. That is the training algorithms attempts to split a node while its depth is less than max_depth. The actual depth may be smaller if the other termination criteria are met (see the outline of the training procedure in the beginning of the section), and/or if the tree is pruned.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.minSampleCount">
+            <summary>
+            A node is not split if the number of samples directed to the node is less than the parameter value. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.cvFolds">
+            <summary>
+            If this parameter is &gt;1, the tree is pruned using cv_folds-fold cross validation.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.useSurrogates">
+            <summary>
+            If true, surrogate splits are built. Surrogate splits are needed to handle missing measurements and for variable importance estimation.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.use1seRule">
+            <summary>
+            If true, the tree is truncated a bit more by the pruning procedure. That leads to compact, and more resistant to the training data noise, but a bit less accurate decision tree. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.truncatePrunedTree">
+            <summary>
+            If true, the cut off nodes (with Tn&lt;=CvDTree::pruned_tree_idx) are physically removed from the tree. Otherwise they are kept, and by decreasing CvDTree::pruned_tree_idx (e.g. setting it to -1) it is still possible to get the results from the original un-pruned (or pruned less aggressively) tree. 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.regressionAccuracy">
+            <summary>
+            Another stop criteria - only for regression trees. As soon as the estimated node value differs from the node training samples responses by less than the parameter value, the node is not split further.
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.priors">
+            <summary>
+            The array of a priori class probabilities, sorted by the class label value. The parameter can be used to tune the decision tree preferences toward a certain class. For example, if users want to detect some rare anomaly occurrence, the training base will likely contain much more normal cases than anomalies, so a very good classification performance will be achieved just by considering every case as normal. To avoid this, the priors can be specified, where the anomaly probability is artificially increased (up to 0.5 or even greater), so the weight of the misclassified anomalies becomes much bigger, and the tree is adjusted properly. 
+            </summary>
+            <remarks>A note about memory management: the field priors  is a pointer to the array of floats. The array should be allocated by user, and released just after the CvDTreeParams structure is passed to CvDTreeTrainData or CvDTree constructors/methods (as the methods make a copy of the array).</remarks>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.calcVarImportance">
+            <summary>
+            If it is set, then variable importance is computed by the training procedure. To retrieve the computed variable importance array, call the method CvRTrees::get_var_importance()
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.nactiveVars">
+            <summary>
+            The number of variables that are randomly selected at each tree node and that are used to find the best split(s). 
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvRTParams.termCrit">
+            <summary>
+            Termination criteria for growing the forest: term_crit.max_iter is the maximum number of trees in the forest (see also max_tree_count parameter of the constructor, by default it is set to 50)
+            term_crit.epsilon is the sufficient accuracy (OOB error). 
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.Structure.MCvSVMParams">
+            <summary>
+            Wrapped CvSVMParams
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.svm_type">
+            <summary>
+            The type of SVM
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.kernel_type">
+            <summary>
+            The type of SVM kernel
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.degree">
+            <summary>
+            for poly
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.gamma">
+            <summary>
+            for poly/rbf/sigmoid
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.coef0">
+            <summary>
+            for poly/sigmoid
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.C">
+            <summary>
+            for CV_SVM_C_SVC, CV_SVM_EPS_SVR and CV_SVM_NU_SVR
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.nu">
+            <summary>
+            for CV_SVM_NU_SVC, CV_SVM_ONE_CLASS, and CV_SVM_NU_SVR
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.p">
+            <summary>
+            for CV_SVM_EPS_SVR
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.class_weights">
+            <summary>
+            for CV_SVM_C_SVC
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.Structure.MCvSVMParams.term_crit">
+            <summary>
+            termination criteria
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.EM_COVARIAN_MATRIX_TYPE">
+            <summary>
+            The type of the mixture covariation matrices
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.EM_COVARIAN_MATRIX_TYPE.COV_MAT_SPHERICAL">
+            <summary>
+            A covariation matrix of each mixture is a scaled identity matrix, ?k*I, so the only parameter to be estimated is ?k. The option may be used in special cases, when the constraint is relevant, or as a first step in the optimization (e.g. in case when the data is preprocessed with PCA). The results of such preliminary estimation may be passed again to the optimization procedure, this time with cov_mat_type=COV_MAT_DIAGONAL
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.EM_COVARIAN_MATRIX_TYPE.COV_MAT_DIAGONAL">
+            <summary>
+            A covariation matrix of each mixture may be arbitrary diagonal matrix with positive diagonal elements, that is, non-diagonal elements are forced to be 0's, so the number of free parameters is d  for each matrix. This is most commonly used option yielding good estimation results
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.EM_COVARIAN_MATRIX_TYPE.COV_MAT_GENERIC">
+            <summary>
+            A covariation matrix of each mixture may be arbitrary symmetrical positively defined matrix, so the number of free parameters in each matrix is about d2/2. It is not recommended to use this option, unless there is pretty accurate initial estimation of the parameters and/or a huge number of training samples
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.EM_INIT_STEP_TYPE">
+            <summary>
+            The initial step the algorithm starts from
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.EM_INIT_STEP_TYPE.START_E_STEP">
+            <summary>
+            The algorithm starts with E-step. 
+            At least, the initial values of mean vectors, CvEMParams.Means must be passed. 
+            Optionally, the user may also provide initial values for weights (CvEMParams.Weights) and/or covariation matrices (CvEMParams.Covs).
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.EM_INIT_STEP_TYPE.START_M_STEP">
+            <summary>
+            The algorithm starts with M-step. The initial probabilities p_{i,k} must be provided
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.EM_INIT_STEP_TYPE.START_AUTO_STEP">
+            <summary>
+            No values are required from the user, k-means algorithm is used to estimate initial mixtures parameters
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.SVM_TYPE">
+            <summary>
+            Type of SVM
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_TYPE.C_SVC">
+            <summary>
+            n-class classification (n>=2), allows imperfect separation of classes with penalty multiplier C for outliers
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_TYPE.NU_SVC">
+            <summary>
+            n-class classification with possible imperfect separation. Parameter nu (in the range 0..1, the larger the value, the smoother the decision boundary) is used instead of C
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_TYPE.ONE_CLASS">
+            <summary>
+            one-class SVM. All the training data are from the same class, SVM builds a boundary that separates the class from the rest of the feature space
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_TYPE.EPS_SVR">
+            <summary>
+            Regression. The distance between feature vectors from the training set and the fitting hyper-plane must be less than p. For outliers the penalty multiplier C is used
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_TYPE.NU_SVR">
+            <summary>
+            Regression; nu is used instead of p.
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE">
+            <summary>
+            The type of SVM parameters
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE.C">
+            <summary>
+            C
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE.GAMMA">
+            <summary>
+            Gamma
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE.P">
+            <summary>
+            P
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE.NU">
+            <summary>
+            NU
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE.COEF">
+            <summary>
+            COEF
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE.DEGREE">
+            <summary>
+            DEGREE
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.SVM_KERNEL_TYPE">
+            <summary>
+            SVM kernel type
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_KERNEL_TYPE.LINEAR">
+            <summary>
+            No mapping is done, linear discrimination (or regression) is done in the original feature space. It is the fastest option. d(x,y) = x y == (x,y)
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_KERNEL_TYPE.POLY">
+            <summary>
+            polynomial kernel: d(x,y) = (gamma*(xy)+coef0)^degree
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_KERNEL_TYPE.RBF">
+            <summary>
+            Radial-basis-function kernel; a good choice in most cases: d(x,y) = exp(-gamma*|x-y|^2)
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.SVM_KERNEL_TYPE.SIGMOID">
+            <summary>
+            sigmoid function is used as a kernel: d(x,y) = tanh(gamma*(xy)+coef0)
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.ANN_MLP_TRAIN_METHOD">
+            <summary>
+            Training method for ANN_MLP
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_TRAIN_METHOD.BACKPROP">
+            <summary>
+            Back-propagation algorithmn
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_TRAIN_METHOD.RPROP">
+            <summary>
+            Batch RPROP algorithm
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.ANN_MLP_ACTIVATION_FUNCTION">
+            <summary>
+            Possible activation functions
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_ACTIVATION_FUNCTION.IDENTITY">
+            <summary>
+            Identity
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_ACTIVATION_FUNCTION.SIGMOID_SYM">
+            <summary>
+            sigmoif symetric
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_ACTIVATION_FUNCTION.GAUSSIAN">
+            <summary>
+            Gaussian
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG">
             <summary>
             The flags for the neural network training function
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.AnnMlpTrainingFlag.Default">
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG.DEFAULT">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.AnnMlpTrainingFlag.UpdateWeights">
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG.UPDATE_WEIGHTS">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.AnnMlpTrainingFlag.NoInputScale">
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG.NO_INPUT_SCALE">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.AnnMlpTrainingFlag.NoOutputScale">
+        <member name="F:Emgu.CV.ML.MlEnum.ANN_MLP_TRAINING_FLAG.NO_OUTPUT_SCALE">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.MlEnum.DataLayoutType">
+        <member name="T:Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE">
             <summary>
             The data layout type
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.DataLayoutType.ColSample">
+        <member name="F:Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE.COL_SAMPLE">
             <summary>
             Feature vectors are stored as cols
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.DataLayoutType.RowSample">
+        <member name="F:Emgu.CV.ML.MlEnum.DATA_LAYOUT_TYPE.ROW_SAMPLE">
             <summary>
             Feature vectors are stored as rows
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.MlEnum.BoostType">
+        <member name="T:Emgu.CV.ML.MlEnum.BOOST_TYPE">
             <summary>
             Boosting type
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostType.Discrete">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_TYPE.DISCRETE">
             <summary>
             Discrete AdaBoost
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostType.Real">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_TYPE.REAL">
             <summary>
             Real AdaBoost
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostType.Logit">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_TYPE.LOGIT">
             <summary>
             LogitBoost
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostType.Gentle">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_TYPE.GENTLE">
             <summary>
             Gentle AdaBoost
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.MlEnum.BoostSplitCreiteria">
+        <member name="T:Emgu.CV.ML.MlEnum.BOOST_SPLIT_CREITERIA">
             <summary>
             Splitting criteria, used to choose optimal splits during a weak tree construction
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostSplitCreiteria.Default">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_SPLIT_CREITERIA.DEFAULT">
             <summary>
             Use the default criteria for the particular boosting method, see below
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostSplitCreiteria.Gini">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_SPLIT_CREITERIA.GINI">
             <summary>
             Use Gini index. This is default option for Real AdaBoost; may be also used for Discrete AdaBoost
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostSplitCreiteria.Misclass">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_SPLIT_CREITERIA.MISCLASS">
             <summary>
             Use misclassification rate. This is default option for Discrete AdaBoost; may be also used for Real AdaBoost
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.BoostSplitCreiteria.Sqerr">
+        <member name="F:Emgu.CV.ML.MlEnum.BOOST_SPLIT_CREITERIA.SQERR">
             <summary>
             Use least squares criteria. This is default and the only option for LogitBoost and Gentle AdaBoost
             </summary>
         </member>
-        <member name="T:Emgu.CV.ML.MlEnum.VarType">
+        <member name="T:Emgu.CV.ML.MlEnum.VAR_TYPE">
             <summary>
             Variable type
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.VarType.Numerical">
+        <member name="F:Emgu.CV.ML.MlEnum.VAR_TYPE.NUMERICAL">
             <summary>
             Numerical or Ordered
             </summary>
         </member>
-        <member name="F:Emgu.CV.ML.MlEnum.VarType.Categorical">
+        <member name="F:Emgu.CV.ML.MlEnum.VAR_TYPE.CATEGORICAL">
             <summary>
             Catagorical
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.SVM">
+            <summary>
+            Support Vector Machine 
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.#ctor">
+            <summary>
+            Create a support Vector Machine
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.DisposeObject">
+            <summary>
+            Release all the memory associated with the SVM
+            </summary>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.Train(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.SVMParams)">
+            <summary>
+            Train the SVM model with the specific paramters
+            </summary>
+            <param name="trainData">The training data.</param>
+            <param name="responses">The response for the training data.</param>
+            <param name="varIdx">Can be null if not needed. When specified, identifies variables (features) of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="sampleIdx">Can be null if not needed. When specified, identifies samples of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="parameters">The parameters for SVM</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.GetDefaultGrid(Emgu.CV.ML.MlEnum.SVM_PARAM_TYPE)">
+            <summary>
+            Get the default parameter grid for the specific SVM type
+            </summary>
+            <param name="type">The SVM type</param>
+            <returns>The default parameter grid for the specific SVM type </returns>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.TrainAuto(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvSVMParams,System.Int32)">
+            <summary>
+            The method trains the SVM model automatically by choosing the optimal parameters C, gamma, p, nu, coef0, degree from CvSVMParams. By the optimality one mean that the cross-validation estimate of the test set error is minimal. 
+            </summary>
+            <param name="trainData">The training data.</param>
+            <param name="responses">The response for the training data.</param>
+            <param name="varIdx">Can be null if not needed. When specified, identifies variables (features) of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="sampleIdx">Can be null if not needed. When specified, identifies samples of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="parameters">The parameters for SVM</param>
+            <param name="kFold">Cross-validation parameter. The training set is divided into k_fold subsets, one subset being used to train the model, the others forming the test set. So, the SVM algorithm is executed k_fold times</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.TrainAuto(Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Single},Emgu.CV.Matrix{System.Byte},Emgu.CV.Matrix{System.Byte},Emgu.CV.ML.Structure.MCvSVMParams,System.Int32,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid,Emgu.CV.ML.Structure.MCvParamGrid)">
+            <summary>
+            The method trains the SVM model automatically by choosing the optimal parameters C, gamma, p, nu, coef0, degree from CvSVMParams. By the optimality one mean that the cross-validation estimate of the test set error is minimal. 
+            </summary>
+            <param name="trainData">The training data.</param>
+            <param name="responses">The response for the training data.</param>
+            <param name="varIdx">Can be null if not needed. When specified, identifies variables (features) of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="sampleIdx">Can be null if not needed. When specified, identifies samples of interest. It is a Matrix&lt;int&gt; of nx1</param>
+            <param name="parameters">The parameters for SVM</param>
+            <param name="kFold">Cross-validation parameter. The training set is divided into k_fold subsets, one subset being used to train the model, the others forming the test set. So, the SVM algorithm is executed k_fold times</param>
+            <param name="cGrid">cGrid</param>
+            <param name="gammaGrid">gammaGrid</param>
+            <param name="pGrid">pGrid</param>
+            <param name="nuGrid">nuGrid</param>
+            <param name="coefGrid">coedGrid</param>
+            <param name="degreeGrid">degreeGrid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.Predict(Emgu.CV.Matrix{System.Single})">
+            <summary>
+            Predicts response for the input sample.
+            </summary>
+            <param name="sample">The input sample</param>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.GetSupportVector(System.Int32)">
+            <summary>
+            The method retrieves a given support vector
+            </summary>
+            <param name="i">The index of the support vector</param>       
+            <returns>The <paramref name="i"/>th support vector</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.GetSupportVectorCount">
+            <summary>
+            The method retrieves the number of support vectors
+            </summary>
+            <returns>The number of support vectors</returns>
+        </member>
+        <member name="M:Emgu.CV.ML.SVM.GetVarCount">
+            <summary>
+            The method retrieves the number of vars
+            </summary>
+            <returns>The number of variables</returns>
+        </member>
+        <member name="P:Emgu.CV.ML.SVM.Parameters">
+            <summary>
+            Get a copy of the SVM parameters
+            </summary>
+        </member>
+        <member name="T:Emgu.CV.ML.SVMParams">
+            <summary>
+            The parameters for the SVM model
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._svmType">
+            <summary>
+            The type of SVM
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._kernelType">
+            <summary>
+            The type of SVM kernel
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._degree">
+            <summary>
+            For poly
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._gamma">
+            <summary>
+            For poly/rbf/sigmoid
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._coef0">
+            <summary>
+            For poly/sigmoid
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._c">
+            <summary>
+            For CV_SVM_C_SVC, CV_SVM_EPS_SVR and CV_SVM_NU_SVR
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._nu">
+            <summary>
+            For CV_SVM_NU_SVC, CV_SVM_ONE_CLASS, and CV_SVM_NU_SVR
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._p">
+            <summary>
+            For CV_SVM_EPS_SVR
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._classWeights">
+            <summary>
+            For CV_SVM_C_SVC
+            </summary>
+        </member>
+        <member name="F:Emgu.CV.ML.SVMParams._termCrit">
+            <summary>
+            Termination criteria
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.SVMType">
+            <summary>
+            The type of SVM
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.KernelType">
+            <summary>
+            The type of SVM kernel
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.Degree">
+            <summary>
+            For poly
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.Gamma">
+            <summary>
+            For poly/rbf/sigmoid
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.Coef0">
+            <summary>
+            For poly/sigmoid
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.C">
+            <summary>
+            For CV_SVM_C_SVC, CV_SVM_EPS_SVR and CV_SVM_NU_SVR
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.Nu">
+            <summary>
+            For CV_SVM_NU_SVC, CV_SVM_ONE_CLASS, and CV_SVM_NU_SVR
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.P">
+            <summary>
+            For CV_SVM_EPS_SVR
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.ClassWeights">
+            <summary>
+            For CV_SVM_C_SVC
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.TermCrit">
+            <summary>
+            Get or Set the termination criteria
+            </summary>
+        </member>
+        <member name="P:Emgu.CV.ML.SVMParams.MCvSVMParams">
+            <summary>
+            Get the equivalent representation of MCvSVMParams
             </summary>
         </member>
     </members>

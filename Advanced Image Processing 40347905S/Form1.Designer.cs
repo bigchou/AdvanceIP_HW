@@ -40,12 +40,12 @@
             this.toHistogram = new System.Windows.Forms.Button();
             this.ApplyGaussionNoise = new System.Windows.Forms.Button();
             this.ConvertColorSpace = new System.Windows.Forms.Button();
+            this.FFT = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -153,6 +153,17 @@
             this.ConvertColorSpace.UseVisualStyleBackColor = true;
             this.ConvertColorSpace.Click += new System.EventHandler(this.ConvertColorSpace_Click);
             // 
+            // FFT
+            // 
+            this.FFT.Location = new System.Drawing.Point(458, 217);
+            this.FFT.Name = "FFT";
+            this.FFT.Size = new System.Drawing.Size(75, 23);
+            this.FFT.TabIndex = 15;
+            this.FFT.Text = "HW5";
+            this.toolTip1.SetToolTip(this.FFT, "Fourier Transformation");
+            this.FFT.UseVisualStyleBackColor = true;
+            this.FFT.Click += new System.EventHandler(this.FFT_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -200,23 +211,12 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "result";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(458, 217);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "HW5";
-            this.toolTip1.SetToolTip(this.button1, "Fourier Transformation");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 486);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.FFT);
             this.Controls.Add(this.ConvertColorSpace);
             this.Controls.Add(this.ApplyGaussionNoise);
             this.Controls.Add(this.toHistogram);
@@ -259,7 +259,7 @@
         private System.Windows.Forms.Button toHistogram;
         private System.Windows.Forms.Button ApplyGaussionNoise;
         private System.Windows.Forms.Button ConvertColorSpace;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button FFT;
     }
 }
 

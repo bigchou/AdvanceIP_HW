@@ -259,7 +259,7 @@ namespace Advanced_Image_Processing_40347905S
                 }
             }
             result = img.ToBitmap();
-
+            //Console.WriteLine("test");
 
 
 
@@ -630,7 +630,7 @@ namespace Advanced_Image_Processing_40347905S
                     }
                     else if (input.GetMode() == 4)
                     {
-                        // toCMYK
+                        // toCMYK without profile
                         for (int i = 0; i < img.Height; i++)
                         {
                             for (int j = 0; j < img.Width; j++)
@@ -663,8 +663,39 @@ namespace Advanced_Image_Processing_40347905S
                                     data[i, j, k] = Convert.ToByte((int)((1.0-cmy[k]) * (1.0-blacK) *255.0));
                             }
                         }
-                        Console.WriteLine("CMYK");
+                        Console.WriteLine("CMYK without color profile");
                     }
+                     /*
+                    else if (input.GetMode() == 5)
+                    {
+                        // toCMYK with profile
+                        for (int i = 0; i < img.Height; i++)
+                        {
+                            for (int j = 0; j < img.Width; j++)
+                            {
+                                double[] cmy = new double[3];
+                                for (int k = 0; k < 3; k++)
+                                {
+                                    cmy[k] = 255 - data[i, j, k];
+                                    Console.WriteLine(cmy[k]);
+                                }
+                                    
+                                double blacK = cmy[0];
+                                for (int k = 0; k < 3; k++)
+                                    if (blacK > cmy[k])
+                                        blacK = cmy[k];
+                                for(int k=0;k<3;k++){
+                                    cmy[k] = (cmy[k]-blacK)/255;
+                                }
+                                blacK = blacK/255;
+                                for (int k = 0; k < 3; k++)
+                                    data[i, j, k] = Convert.ToByte(Math.Round(cmy[k]));
+                                    //Console.WriteLine(cmy[k]);
+                                    
+                            }
+                        }
+                        Console.WriteLine("CMYK with color profile");
+                    }(*/
                     int u = 0, v = 0;
                     // upperleft --- Gray
                     for (int i = 0; i < img.Height; i += 2)
@@ -753,9 +784,9 @@ namespace Advanced_Image_Processing_40347905S
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FFT_Click(object sender, EventArgs e)
         {
-            Image<Gray, float> image = new Image<Gray, float>(beforeBitmap);
+            Image<Gray,float> image = new Image<Gray, float>(beforeBitmap);
             //Matrix<float> complexImage = new Matrix<float>(image.Width, image.Height);
             //image.CopyTo(complexImage);
 
@@ -768,7 +799,7 @@ namespace Advanced_Image_Processing_40347905S
 
 
 
-
+            
 
 
 
@@ -797,6 +828,7 @@ namespace Advanced_Image_Processing_40347905S
 
             // Transform 1 channel grayscale image into 2 channel image
             IntPtr complexImage = CvInvoke.cvCreateImage(image.Size, Emgu.CV.CvEnum.IPL_DEPTH.IPL_DEPTH_32F, 2);
+            CvInvoke.cvSetZero(complexImage);  // Initialize all elements to Zero
             CvInvoke.cvSetImageCOI(complexImage, 1); // Select the channel to copy into
             CvInvoke.cvCopy(image, complexImage, IntPtr.Zero);
             CvInvoke.cvSetImageCOI(complexImage, 0); // Select all channels
@@ -810,7 +842,10 @@ namespace Advanced_Image_Processing_40347905S
 
 
             pictureBox2.Image = Matrix2Bitmap(forwardDftMagnitude);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            if(forwardDftMagnitude.Size.Height * forwardDftMagnitude.Size.Width > pictureBox2.Size.Height * pictureBox2.Size.Width)
+                pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            else
+                pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
 
 
 
@@ -894,9 +929,31 @@ namespace Advanced_Image_Processing_40347905S
         private Bitmap Matrix2Bitmap(Matrix<float> matrix)
         {
             //CvInvoke.Normalize(matrix, matrix, 0.0, 255.0, Emgu.CV.CvEnum.NormType.MinMax);
-            CvInvoke.cvNormalize(matrix, matrix, 0.0, 255.0, Emgu.CV.CvEnum.NORM_TYPE.CV_MINMAX, IntPtr.Zero);
+            //CvInvoke.cvNormalize(matrix, matrix, 0.0, 255.0, Emgu.CV.CvEnum.NORM_TYPE.CV_MINMAX, IntPtr.Zero);
+            float min = matrix[0,0], max = min;
+            for(int i=0;i<matrix.Size.Height;i++)
+                for(int j=0;j<matrix.Size.Width;j++){
+                    if (max < matrix[i, j])
+                        max = matrix[i, j];
+
+                    if(min > matrix[i,j])
+                        min = matrix[i,j];
+                }
+
+
+            
+
+
             Image<Gray, float> image = new Image<Gray, float>(matrix.Size);
-            matrix.CopyTo(image);
+            float[, ,] data = image.Data;
+            //matrix.CopyTo(image);
+            for (int i = 0; i < image.Height; i++)
+            {
+                for (int j = 0; j < image.Width; j++)
+                {
+                    data[i,j,0] = (float)Math.Floor(255.0 / (max - min) * (matrix[i,j] - min));
+                }
+            }
             return image.ToBitmap();
         }
 
