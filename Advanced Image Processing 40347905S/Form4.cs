@@ -40,5 +40,10 @@ namespace Advanced_Image_Processing_40347905S
         {
             mode = 4;
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            mode = 5;
+        }
     }
 }
