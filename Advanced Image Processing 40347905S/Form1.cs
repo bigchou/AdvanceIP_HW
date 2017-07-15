@@ -2257,6 +2257,90 @@ namespace Advanced_Image_Processing_40347905S
            
         }
 
+        public struct coord
+        {
+            public double x;
+            public double y;
+        }  
+
+        private void resizeBtn_Click(object sender, EventArgs e)
+        {
+            if (flag == true)
+            {
+                Form12 input = new Form12();
+                DialogResult dr = input.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    afterBitmap = beforeBitmap;
+                    pictureBox2.Image = afterBitmap;
+                    pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+
+                    Image<Bgr, byte> im = new Image<Bgr, byte>(afterBitmap);
+                    Byte[, ,] data2 = im.Data;
+
+                    Image<Bgr, byte> img = new Image<Bgr, byte>(input.GetHeight(), input.GetWidth());
+                    Byte[, ,] data = img.Data;
+
+                    coord[,] tmp = new coord[afterBitmap.Height, afterBitmap.Width];
+                    for (int i = 0; i < afterBitmap.Height; i++)
+                    {
+                        for (int j = 0; j < afterBitmap.Width; j++)
+                        {
+                            tmp[i, j].y = i / (double)afterBitmap.Height;
+                            tmp[i, j].x = j / (double)afterBitmap.Width;
+                        }
+                    }
+                    coord[,] ori = new coord[input.GetHeight(), input.GetWidth()];
+                    for (int i = 0; i < input.GetHeight(); i++)
+                    {
+                        for (int j = 0; j < input.GetWidth(); j++)
+                        {
+                            ori[i, j].y = i / (double)input.GetHeight();
+                            ori[i, j].x = j / (double)input.GetWidth();
+                        }
+                    }
+                    int cura = 0;
+                    int curb = 0;
+                    for (int i = 0; i < input.GetHeight(); i++)
+                    {
+                        for (int j = 0; j < input.GetWidth(); j++)
+                        {
+                            for (int a = cura; a < afterBitmap.Height; a++, cura++)
+                            {
+                                bool xflag = false;
+
+                                for (int b = curb; b < afterBitmap.Width; b++, curb++)
+                                {
+                                    if (tmp[a, b].x >= ori[i, j].x && tmp[a, b].y >= ori[i, j].y)
+                                    {
+                                        for (int k = 0; k < 3; k++)
+                                        {
+                                            data[i, j, k] += data2[a, b, k];
+                                        }
+                                        xflag = true;
+                                        break;
+                                    }
+
+                                }
+                                if (xflag == true)
+                                    break;
+                                else
+                                    curb = 0;
+
+                            }
+                        }
+                    }
+                    pictureBox2.Image = img.ToBitmap();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select an image to continue...");
+            }
+        }
+
         
         
     }
