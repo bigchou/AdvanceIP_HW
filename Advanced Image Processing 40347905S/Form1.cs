@@ -2279,8 +2279,43 @@ namespace Advanced_Image_Processing_40347905S
                     Image<Bgr, byte> im = new Image<Bgr, byte>(afterBitmap);
                     Byte[, ,] data2 = im.Data;
 
-                    Image<Bgr, byte> img = new Image<Bgr, byte>(input.GetHeight(), input.GetWidth());
+
+                    Console.WriteLine(input.GetWidth());
+                    Console.WriteLine(input.GetHeight());
+                    Image<Bgr, byte> img = new Image<Bgr, byte>(input.GetWidth(), input.GetHeight());
                     Byte[, ,] data = img.Data;
+
+
+                    double zoom_ratio_x = (double)img.Width / (double)im.Width;
+                    double zoom_ratio_y = (double)img.Height / (double)im.Height;
+
+                    int opo = data2[471, 0, 1];
+
+                    for (int i = 0; i < input.GetHeight(); i++)
+                    {
+                        for (int j = 0; j < input.GetWidth(); j++)
+                        {
+                            
+                            int y = ((int)((double)(i) / zoom_ratio_y) >= im.Height) ? im.Height-1 : (int)((double)(i) / zoom_ratio_y);
+                            
+                            int x = ((int)((double)(j) / zoom_ratio_x) >= im.Width) ? im.Width-1 : (int)((double)(j) / zoom_ratio_x);
+                            //Console.WriteLine("Y:" + y.ToString()+"i:"+i.ToString());
+                            //Console.WriteLine("X:"+x.ToString()+"j:"+j.ToString());
+                            for (int k = 0; k < 3; k++)
+                            {
+                                data[i, j, k] = data2[y, x, k];
+                                //int ppp = data2[y, x, k];
+                            }
+                           // Console.WriteLine("Error");
+                        }
+                    }
+
+
+
+                    /*
+                    int maxheight = afterBitmap.Height > input.GetHeight() ? afterBitmap.Height : input.GetHeight();
+                    int maxwidth = afterBitmap.Width > input.GetWidth() ? afterBitmap.Width : input.GetWidth();
+
 
                     coord[,] tmp = new coord[afterBitmap.Height, afterBitmap.Width];
                     for (int i = 0; i < afterBitmap.Height; i++)
@@ -2316,7 +2351,7 @@ namespace Advanced_Image_Processing_40347905S
                                     {
                                         for (int k = 0; k < 3; k++)
                                         {
-                                            data[i, j, k] += data2[a, b, k];
+                                            data[i, j, k] = data2[a, b, k];
                                         }
                                         xflag = true;
                                         break;
@@ -2331,6 +2366,7 @@ namespace Advanced_Image_Processing_40347905S
                             }
                         }
                     }
+                    */
                     pictureBox2.Image = img.ToBitmap();
                 }
 
